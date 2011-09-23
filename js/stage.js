@@ -21,7 +21,7 @@ var Stage = (function(){
 		start : function(){
 		
 		
-		}
+		},
 		
 		step : function (){
 		
