@@ -7,16 +7,16 @@ var Game = (function(){
 	
 	var 
 	//默认 fps
-	fps = 30,
+	fps = 24,
+	
+	//单步运行时间
+	step_time = 1000/fps,
 
 	//循环控件
 	interval,
 	
 	//游戏状态
 	is_pause = false,
-	
-	//单步运行时间
-	step_time = 10,
 
 	//统计帧
 	frame_count = 0,
@@ -29,9 +29,10 @@ var Game = (function(){
 	//单例类
 	instance = {
 		//入口函数 加载设置
-		init : function(Config){
+		init : function(){
 			delete this.init;
-			load(Config);
+			load();
+			Command.init();
 			Stage.init();
 		},
 		//游戏开始
@@ -42,6 +43,7 @@ var Game = (function(){
 
 		//暂停
 		pause : function(){
+			var that = this;
 			if(is_pause){
 				interval = setTimeout(function(){that.step()},step_time);
 			}else{
@@ -52,7 +54,7 @@ var Game = (function(){
 		//单步循环
 		step : function(){
 			var that = this;
-
+			$('p').html(fps + ' \n' + step_time);
 			frame_count++;
 			
 			//每50帧调节一次fps
@@ -75,7 +77,7 @@ var Game = (function(){
 	};
 
 	//加载函数
-	function load(Config){
+	function load(){
 		var loadCount = 0 ;
 		for (var i=0,len=Config.img.length; i<len; i++){
 			var img = new Image();
