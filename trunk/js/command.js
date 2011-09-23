@@ -5,7 +5,7 @@ var Command = function(){
 			window.addEventListener('keydown', handle, false);
 			window.addEventListener('keyup', handle, false);
 		},
-		state = {}
+		state : {}
 	};
 	
 	//事件绑定

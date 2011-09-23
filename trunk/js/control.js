@@ -7,13 +7,6 @@ var Game = (function(){
 	
 	var 
 	//默认 fps
-	fps = 24,
-
-
-var game = (function(){
-	
-	var 
-	//默认 fps
 	fps = 30,
 
 	//循环控件
@@ -31,7 +24,7 @@ var game = (function(){
 	frame_last_time = 0,
 	
 	//关卡
-	stage，
+	stage,
 
 	//单例类
 	instance = {
@@ -85,7 +78,7 @@ var game = (function(){
 	function load(Config){
 		var loadCount = 0 ;
 		for (var i=0,len=Config.img.length; i<len; i++){
-			var img = new images();
+			var img = new Image();
 			img.src = Config.img[i];
 			img.onload = function(){
 				loadCount++;
@@ -96,3 +89,7 @@ var game = (function(){
 	return instance;
 	
 })()
+
+window.onload = function(){
+	Game.init(Config);
+}

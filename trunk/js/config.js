@@ -3,7 +3,7 @@
 */
 var Config = {
 
-	img : ['img/player.gif'];
+	img : ['img/player.gif'],
 
 	/**/
 	stage : [
