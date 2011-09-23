@@ -17,5 +17,6 @@ var Player = (function(Sprite){
 	
 	}
 
+	return Player;
 
 })(Sprite)

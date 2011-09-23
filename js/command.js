@@ -1,11 +1,13 @@
 var Command = function(){
 	// 键盘事件状态
-	var instance = {
+	var 
+	state = {},
+	instance = {
 		init : function(){
 			window.addEventListener('keydown', handle, false);
 			window.addEventListener('keyup', handle, false);
 		},
-		state : {}
+		state : state
 	};
 	
 	//事件绑定
@@ -14,15 +16,17 @@ var Command = function(){
 		timeNow = +new Date();
 		switch (e.type) {
 			case 'keydown':
-				if (this.state[code] > 0) return;
-				this.state[code] ? ++this.state[code] : this.state[code] = 1;
+				if (state[code] > 0) return;
+				state[code] ? ++state[code] : state[code] = 1;
 				//queue.push('(' + timeNow + ')' + code + '↓');
 				if (code == 80){
 					Game.pause();
+				}else if(code == 13){
+					Game.start();
 				}
 				break;
 			case 'keyup':
-				this.state[code] = 0;
+				state[code] = 0;
 				//queue.push('(' + timeNow + ')' + code + '↑');
 				break;
 		}
