@@ -5,7 +5,7 @@ var Keeper = (function(Sprite){
 
 
 	var Keeper = function(){
-		this.keyState = Command.state;
+		
 	
 	}
 		

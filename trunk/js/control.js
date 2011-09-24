@@ -10,7 +10,7 @@ var Game = (function(){
 	fps = 24,
 	
 	//单步运行时间
-	step_time = 1000/fps,
+	step_time = Math.round(1000/fps),
 
 	//循环控件
 	interval,
@@ -26,18 +26,30 @@ var Game = (function(){
 	//关卡
 	stage,
 
+	//canvas
+	canvas,
+	ctx,
+
+	//加载图片缓存
+
 	//单例类
 	instance = {
 		//入口函数 加载设置
 		init : function(){
 			delete this.init;
+			this.imgCache = {};
 			load();
 			Command.init();
 			Stage.init();
+			canvas = document.getElementById('canvas');
+			ctx = canvas.getContext('2d');
+			canvas.width = 304;
+			canvas.height = 202;
+			
 		},
 		//游戏开始
 		start : function(){
-			(stage = new Stage(1)).start();
+			(this.stage = new Stage(1)).start();
 			this.step();
 		},
 
@@ -54,11 +66,10 @@ var Game = (function(){
 		//单步循环
 		step : function(){
 			var that = this;
-			$('p').html(fps + ' \n' + step_time);
 			frame_count++;
 			
 			//每50帧调节一次fps
-			if( frame_count%50 ) {
+			if( frame_count%50 == 0) {
 				// 计算 fps
 				var t = +new Date();
 				fps = Math.round(500000 / (t - frame_last_time)) / 10;
@@ -70,9 +81,19 @@ var Game = (function(){
 				} else if (fps > 24.4) {
 					step_time ++;
 				}
+				$('p').html('fps:'+fps+'<br/>step_time:'+step_time);
 			}
-			stage.step();
+			this.stage.step();
 			interval = setTimeout(function(){that.step()},step_time);
+		},
+		draw : function(img,x,y,w,h,cx,cy,cw,ch){
+			w = w || img.width;
+			h = h || img.height;
+			cx= cx || x;
+			cy= cy || y;
+			cw= cw || w;
+			ch= ch || h;
+			ctx.drawImage(img,x,y,w,h,cx,cy,cw,ch);
 		}
 	};
 
@@ -81,10 +102,13 @@ var Game = (function(){
 		var loadCount = 0 ;
 		for (var i=0,len=Config.img.length; i<len; i++){
 			var img = new Image();
-			img.src = Config.img[i];
-			img.onload = function(){
-				loadCount++;
-			}
+			img.src = 'img/'+Config.img[i]+'.gif';
+			img.onload = (function(i){
+				return function(){
+					loadCount++;
+					Game.imgCache[Config.img[i]] = img;
+				}
+			})(i)
 		}
 	}
 
