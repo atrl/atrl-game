@@ -14,10 +14,6 @@ function Sprite(){
 
 Sprite.prototype = {
 	
-	draw : function(){
-		drawImage(this.img, sourceX, sourceY, sourceWidth, sourceHeight,destX, destY, destWidth, destHeight)
-	}
-	
 
 
 

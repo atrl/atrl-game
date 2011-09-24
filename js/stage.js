@@ -11,9 +11,14 @@ var Stage = (function(){
 
 	map,
 
+	//canvas
+	canvas,
+	ctx,s
+
+
 	Stage = function(stage){
 		this.stage = stage;
-	
+		this.img = 'bg';
 	};
 
 	Stage.init = function(){
@@ -28,10 +33,10 @@ var Stage = (function(){
 					this.create(Config.stage[x][y],x,y);
 				}
 			}
-		
 		},
 		
 		'step' : function (){
+			Game.draw(Game.imgCache[this.img],0,0);
 			for(var i=0,len=SpritePool.length;i<len;i++){
 				SpritePool[i].step();
 			}
