@@ -102,11 +102,9 @@ var Game = (function(){
 		for (var i=0,len=Config.img.length; i<len; i++){
 			Game.imgCache[Config.img[i]] = new Image();
 			Game.imgCache[Config.img[i]].src = 'img/'+Config.img[i]+'.gif';
-			Game.imgCache[Config.img[i]].onload = (function(i){
-				return function(){
-					loadCount++;
-				}
-			})(i)
+			Game.imgCache[Config.img[i]].onload = function(){
+				loadCount++;
+			}
 		}
 	}
 

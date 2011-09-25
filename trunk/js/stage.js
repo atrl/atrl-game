@@ -20,9 +20,9 @@ var Stage = (function(){
 	Stage.prototype = {
 		'start' : function(){
 			this.map = Config.stage.slice();
-			for(var y=0,ylen=Config.stage.length;y<ylen;y++){
-				for(var x=0,xlen=Config.stage[x].length;x<xlen;x++){
-					this.create(Config.stage[y][x],x,y);
+			for(var y=0,ylen=this.map.length;y<ylen;y++){
+				for(var x=0,xlen=this.map[x].length;x<xlen;x++){
+					this.create(this.map[y][x],x,y);
 				}
 			}
 		},
@@ -36,15 +36,16 @@ var Stage = (function(){
 
 		'create' : function(sprite, x, y){
 			var id = sprite +'_'+ +new Date()+'_'+x+'_'+y;
-			switch(sprite){
+			sprite = (sprite+"").split('');
+			switch(+sprite[0]){
 				case 1:
 					SpritePool[id] = new Player(x,y);
 					break;
 				case 2:
-					SpritePool[id] = new Keeper(x,y);
+					SpritePool[id] = new Wall(sprite[1],x,y);
 					break;
 				case 3:
-					SpritePool[id] = new Wall(x,y);
+					SpritePool[id] = new Keeper(x,y);
 					break;
 				case 4:
 					SpritePool[id] = new Bonus(x,y);
