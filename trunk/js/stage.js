@@ -9,13 +9,6 @@ var Stage = (function(){
 
 	SpritePool = [],
 
-	map,
-
-	//canvas
-	canvas,
-	ctx,s
-
-
 	Stage = function(stage){
 		this.stage = stage;
 		this.img = 'bg';
@@ -23,46 +16,46 @@ var Stage = (function(){
 
 	Stage.init = function(){
 	
-	
 	}
 	Stage.prototype = {
 		'start' : function(){
 			this.map = Config.stage.slice();
-			for(var x=0,xlen=Config.stage.length;x<xlen;x++){
-				for(var y=0,ylen=Config.stage[x].length;y<ylen;y++){
-					this.create(Config.stage[x][y],x,y);
+			for(var y=0,ylen=Config.stage.length;y<ylen;y++){
+				for(var x=0,xlen=Config.stage[x].length;x<xlen;x++){
+					this.create(Config.stage[y][x],x,y);
 				}
 			}
 		},
 		
 		'step' : function (){
 			Game.draw(Game.imgCache[this.img],0,0);
-			for(var i=0,len=SpritePool.length;i<len;i++){
+			for(var i in SpritePool){
 				SpritePool[i].step();
 			}
 		},
 
 		'create' : function(sprite, x, y){
-			var id = sprite +'_'+ +new Date();
+			var id = sprite +'_'+ +new Date()+'_'+x+'_'+y;
 			switch(sprite){
 				case 1:
-					SpritePool[id] = new Player(Config.player);
+					SpritePool[id] = new Player(x,y);
 					break;
 				case 2:
-					SpritePool[id] = new Keeper(Config.keeper);
+					SpritePool[id] = new Keeper(x,y);
+					break;
 				case 3:
-					SpritePool[id] = new Wall(Config.wall);
+					SpritePool[id] = new Wall(x,y);
 					break;
 				case 4:
-					SpritePool[id] = new Bonus(Config.bonus);
+					SpritePool[id] = new Bonus(x,y);
 					break;
 				case 5:
-					SpritePool[id] = new Bullet(Config.bullet);
+					SpritePool[id] = new Bullet(x,y);
 					break;
 				default:
 					break;
 			}
-			this.map[x][y] = id;
+			this.map[y][x] = id;
 		},
 		'delete' : function(spriteId){
 			delete SpritePool[spriteId];

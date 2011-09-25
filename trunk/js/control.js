@@ -45,11 +45,10 @@ var Game = (function(){
 			ctx = canvas.getContext('2d');
 			canvas.width = 304;
 			canvas.height = 202;
-			
 		},
 		//游戏开始
 		start : function(){
-			(this.stage = new Stage(1)).start();
+			(stage = new Stage(1)).start();
 			this.step();
 		},
 
@@ -83,7 +82,7 @@ var Game = (function(){
 				}
 				$('p').html('fps:'+fps+'<br/>step_time:'+step_time);
 			}
-			this.stage.step();
+			stage.step();
 			interval = setTimeout(function(){that.step()},step_time);
 		},
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
@@ -101,12 +100,11 @@ var Game = (function(){
 	function load(){
 		var loadCount = 0 ;
 		for (var i=0,len=Config.img.length; i<len; i++){
-			var img = new Image();
-			img.src = 'img/'+Config.img[i]+'.gif';
-			img.onload = (function(i){
+			Game.imgCache[Config.img[i]] = new Image();
+			Game.imgCache[Config.img[i]].src = 'img/'+Config.img[i]+'.gif';
+			Game.imgCache[Config.img[i]].onload = (function(i){
 				return function(){
 					loadCount++;
-					Game.imgCache[Config.img[i]] = img;
 				}
 			})(i)
 		}
