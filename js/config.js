@@ -3,7 +3,7 @@
 */
 var Config = {
 
-	img : ['player','bg'],
+	img : ['player','bg','keeper'],
 
 	/**
 	*	地图
@@ -26,10 +26,27 @@ var Config = {
 		[0,2,2,2,3,2,0,2,3,2,3,2,0],
 		[3,0,0,0,3,0,3,0,3,3,0,3,3]
 	],
-
+	gridW : 16,
+	gridH : 16,
+	paddingX : 48,
+	paddingY : 10,
 	player : {},
 	bullet : {},
-	keeper : [{x:0,y:0,w:16,h:16},{}],
+	keeper : {
+		img:'keeper',
+		frames:{
+			default:[{x:0,y:0,w:16,h:16}],
+			die:[
+				{x:16,y:0,w:16,h:16},
+				{x:32,y:0,w:16,h:16},
+				{x:48,y:0,w:16,h:16},
+				{x:64,y:0,w:16,h:16},
+				{x:80,y:0,w:16,h:16},
+				{x:96,y:0,w:16,h:16},
+				{x:112,y:0,w:16,h:16}
+			]
+		}
+	},
 	bonus  : {},
 
 	
