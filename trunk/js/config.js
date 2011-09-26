@@ -4,7 +4,6 @@
 var Config = {
 
 	img : ['player','bg','keeper'],
-
 	/**
 	*	地图
 	*	1:玩家
@@ -26,10 +25,13 @@ var Config = {
 		[0 ,21,0 ,23,3 ,23,3 ,21,3 ,22,0 ,20,0 ],
 		[0 ,0 ,0 ,3 ,3 ,0 ,3 ,0 ,3 ,3 ,0 ,0 ,0 ]
 	],
+	//格子属性
 	gridW : 16,
 	gridH : 16,
+	//地图边距
 	paddingX : 48,
 	paddingY : 10,
+	//精灵属性
 	player : {},
 	bullet : {},
 	keeper : {

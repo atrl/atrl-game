@@ -1,14 +1,14 @@
 ﻿﻿/**
 *	玩家类
 */
-var Player = (function(Sprite){
+Game.module('Player',function(Game){
 
 
 	var Player = function(){
 		this.keyState = Command.state;
-	
+		this.toward = 0; // 0:上 1:右 2:下 3:左
 	}
-		
+	
 	Player.prototype = new Sprite();
 	Player.prototype.constructor = Player;
 
@@ -19,4 +19,4 @@ var Player = (function(Sprite){
 
 	return Player;
 
-})(Sprite)
+});
