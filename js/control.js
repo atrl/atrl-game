@@ -32,7 +32,7 @@ var Game = (function(){
 		//关卡
 		stage : 0,
 
-		//对象池
+		//类池
 		pool : {},
 
 		//入口函数 加载设置
@@ -83,9 +83,13 @@ var Game = (function(){
 				}
 				$('p').html('fps:'+fps+'<br/>step_time:'+step_time);
 			}
+
+			//帧进步
 			this.stage.step();
+
 			interval = setTimeout(function(){that.step()},step_time);
 		},
+		//绘画方法
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
 			w = w || img.width;
 			h = h || img.height;
@@ -109,7 +113,7 @@ var Game = (function(){
 			}
 		}
 	}
-
+	window._Game = Game;
 	return {
 		init : function(Config){
 			Game.init(Config);

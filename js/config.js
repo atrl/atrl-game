@@ -32,7 +32,33 @@ var Config = {
 	paddingX : 48,
 	paddingY : 10,
 	//精灵属性
-	player : {},
+	player : {
+		img : 'player',
+		keycode : [37, 38, 39, 40],
+		frames :{
+			default :[
+				
+			],
+			0 : [
+			
+			],
+			1 : [
+			
+			],
+			2 : [
+				
+			],
+			3 : [
+				
+			],
+			stand : [
+			
+			],
+			die : [
+			
+			]
+		}
+	},
 	bullet : {},
 	keeper : {
 		img:'keeper',
@@ -60,5 +86,4 @@ var Config = {
 			3:{x:48,y:16,w:16,h:22}
 		}
 	}
-
 };

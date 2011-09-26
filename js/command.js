@@ -17,7 +17,7 @@ var Command = function(){
 		switch (e.type) {
 			case 'keydown':
 				if (state[code] > 0) return;
-				state[code] ? ++state[code] : state[code] = 1;
+				state[code] = timeNow;
 				//queue.push('(' + timeNow + ')' + code + '↓');
 				if (code == 80){
 					Game.pause();
