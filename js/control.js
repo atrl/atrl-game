@@ -22,25 +22,26 @@ var Game = (function(){
 	frame_count = 0,
 	
 	frame_last_time = 0,
-	
-	//关卡
-	stage,
 
 	//canvas
 	canvas,
 	ctx,
 
-	//加载图片缓存
+	//游戏主程序
+	Game = {
+		//关卡
+		stage : 0,
 
-	//单例类
-	instance = {
+		//对象池
+		pool : {},
+
 		//入口函数 加载设置
 		init : function(){
 			delete this.init;
 			this.imgCache = {};
 			load();
 			Command.init();
-			Stage.init();
+			this.pool['Stage'].init();
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
 			canvas.width = 304;
@@ -48,7 +49,7 @@ var Game = (function(){
 		},
 		//游戏开始
 		start : function(){
-			(stage = new Stage(1)).start();
+			(this.stage = new this.pool['Stage'](1)).start();
 			this.step();
 		},
 
@@ -82,7 +83,7 @@ var Game = (function(){
 				}
 				$('p').html('fps:'+fps+'<br/>step_time:'+step_time);
 			}
-			stage.step();
+			this.stage.step();
 			interval = setTimeout(function(){that.step()},step_time);
 		},
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
@@ -93,7 +94,8 @@ var Game = (function(){
 			cw= cw || w;
 			ch= ch || h;
 			ctx.drawImage(img,x,y,w,h,cx,cy,cw,ch);
-		}
+		},
+		
 	};
 
 	//加载函数
@@ -108,7 +110,20 @@ var Game = (function(){
 		}
 	}
 
-	return instance;
+	return {
+		init : function(Config){
+			Game.init(Config);
+		},
+		start : function(){
+			Game.start();
+		},
+		pause :function(){
+			Game.pause();
+		},
+		module : function(name, func){
+			Game.pool[name] = func(Game);
+		}
+	};
 	
 })()
 

@@ -1,7 +1,7 @@
 ﻿﻿/**
-*	玩家类
+*	奖励类
 */
-var Bonus = (function(Sprite){
+Game.module('Bonus', function(Game){
 
 
 	var Bonus = function(){
@@ -19,4 +19,4 @@ var Bonus = (function(Sprite){
 
 	return Bonus;
 
-})(Sprite)
+});

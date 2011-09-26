@@ -1,7 +1,7 @@
 ﻿﻿/**
 *	障碍类
 */
-var Keeper = (function(Sprite){
+Game.module('Keeper',function(Game){
 
 
 	var Keeper = function(x,y){
@@ -24,4 +24,4 @@ var Keeper = (function(Sprite){
 
 	return Keeper;
 
-})(Sprite)
+});

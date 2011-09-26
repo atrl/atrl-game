@@ -4,7 +4,7 @@
 *
 */
 
-var Bullet = (function(Sprite){
+Game.module('Bullet', function(Game){
 
 	var Bullet = function(config){
 		this.create_time = config.create_time;
@@ -24,4 +24,4 @@ var Bullet = (function(Sprite){
 	
 	}
 
-})(Sprite)
+});

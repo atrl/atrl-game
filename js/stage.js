@@ -3,7 +3,7 @@
 *
 */
 
-var Stage = (function(){
+Game.module('Stage', function(Game){
 
 	var 
 
@@ -15,7 +15,6 @@ var Stage = (function(){
 	};
 
 	Stage.init = function(){
-	
 	}
 	Stage.prototype = {
 		'start' : function(){
@@ -30,7 +29,11 @@ var Stage = (function(){
 		'step' : function (){
 			Game.draw(Game.imgCache[this.img],0,0);
 			for(var i in SpritePool){
-				SpritePool[i].step();
+				if(SpritePool[i].life){
+					SpritePool[i].step();
+				}else{
+					this.delete(i);
+				}
 			}
 		},
 
@@ -39,19 +42,19 @@ var Stage = (function(){
 			sprite = (sprite+"").split('');
 			switch(+sprite[0]){
 				case 1:
-					SpritePool[id] = new Player(x,y);
+					SpritePool[id] = new Game.pool['Player'](x,y);
 					break;
 				case 2:
-					SpritePool[id] = new Wall(sprite[1],x,y);
+					SpritePool[id] = new Game.pool['Wall'](sprite[1],x,y);
 					break;
 				case 3:
-					SpritePool[id] = new Keeper(x,y);
+					SpritePool[id] = new Game.pool['Keeper'](x,y);
 					break;
 				case 4:
-					SpritePool[id] = new Bonus(x,y);
+					SpritePool[id] = new Game.pool['Bonus'](x,y);
 					break;
 				case 5:
-					SpritePool[id] = new Bullet(x,y);
+					SpritePool[id] = new Game.pool['Bullet'](x,y);
 					break;
 				default:
 					break;
@@ -65,4 +68,4 @@ var Stage = (function(){
 
 	return Stage;
 
-})()
+});
