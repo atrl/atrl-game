@@ -5,6 +5,7 @@ Game.module('Player',function(Game){
 
 
 	var Player = function(x,y){
+		this.img = 'player';
 		this.keyState = Command.state;
 		this.toward = 2; // 0:上 1:右 2:下 3:左
 		this.action = 'default';
@@ -19,14 +20,15 @@ Game.module('Player',function(Game){
 	Player.prototype.constructor = Player;
 
 	Player.prototype.step = function(){
-		this.getToward();
+		//this.getToward();
 		
 		if(this.frameCount = this.frames[this.action].length-1){
 			this.action == 'die' ? this.life = 0 : this.frameCount = 0;
 		}
 
-		this.frame = this.frames[this.action][this.frameCount];
-		Game.draw(Game.imgCache[this.img], this.frame.x, this.frame.y, this.frame.w, this.frame.h,(this.x+1)*Config.gridW+Config.paddingX-this.frame.w,(this.y+1)*Config.gridH+Config.paddingY-this.frame.h,this.frame.w, this.frame.h);
+		this.frame = this.frames[this.action][this.toward];
+		
+		Game.draw(Game.imgCache[this.img], this.frame.x, this.frame.y, this.frame.w, this.frame.h,this.x+Config.gridW+Config.paddingX-this.frame.w,this.y+Config.gridH+Config.paddingY-this.frame.h,this.frame.w, this.frame.h);
 
 		this.frameCount++;
 	}
