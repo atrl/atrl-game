@@ -1,4 +1,4 @@
-﻿﻿/**
+﻿/**
 *	障碍类
 */
 Game.module('Keeper',function(Game){
@@ -19,12 +19,14 @@ Game.module('Keeper',function(Game){
 	Keeper.prototype.step = function(){
 
 		if(this.frameCount < this.frames[this.action].length-1){
-			this.frameCount++;
+			
 		}else if(this.frameCount = this.frames[this.action].length-1){
 			this.action == 'die' ? this.life = 0 : this.frameCount = 0;
 		}
-		var frame = this.frames[this.action][this.frameCount];
-		Game.draw(Game.imgCache[this.img], frame.x, frame.y, frame.w, frame.h,this.x*Config.gridW+Config.paddingX,this.y*Config.gridH+Config.paddingY,frame.w, frame.h);
+		this.frame = this.frames[this.action][this.frameCount];
+		Game.draw(Game.imgCache[this.img], this.frame.x, this.frame.y, this.frame.w, this.frame.h,this.x*Config.gridW+Config.paddingX,this.y*Config.gridH+Config.paddingY, this.frame.w, this.frame.h);
+
+		this.frameCount++;
 	}
 
 	return Keeper;

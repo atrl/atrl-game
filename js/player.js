@@ -21,14 +21,14 @@ Game.module('Player',function(Game){
 	Player.prototype.step = function(){
 		this.getToward();
 		
-		if(this.frameCount < this.frames[this.action].length-1){
-			this.frameCount++;
-		}else if(this.frameCount = this.frames[this.action].length-1){
+		if(this.frameCount = this.frames[this.action].length-1){
 			this.action == 'die' ? this.life = 0 : this.frameCount = 0;
 		}
 
 		this.frame = this.frames[this.action][this.frameCount];
 		Game.draw(Game.imgCache[this.img], this.frame.x, this.frame.y, this.frame.w, this.frame.h,(this.x+1)*Config.gridW+Config.paddingX-this.frame.w,(this.y+1)*Config.gridH+Config.paddingY-this.frame.h,this.frame.w, this.frame.h);
+
+		this.frameCount++;
 	}
 	Player.prototype.getToward = function(){
 		var state = 0;
