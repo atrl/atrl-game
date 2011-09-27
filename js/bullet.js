@@ -21,7 +21,7 @@ Game.module('Bullet', function(Game){
 		}
 	},
 	Bullet.prototype.boom = function(){
-	
+		alert(1);
 	}
 
 });
