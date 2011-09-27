@@ -5,7 +5,7 @@ Game.module('Player',function(Game){
 
 
 	var Player = function(x,y){
-		this.img = 'player';
+		this.img = Config.player.img;
 		this.keyState = Command.state;
 		this.toward = 3; // 0:左 1:上 2:右 3:下
 		this.action = 'default';
