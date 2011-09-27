@@ -71,8 +71,8 @@ Game.module('Player',function(Game){
 	}
 
 	Player.prototype.doRun = function(){
-		var xy = this.toward%2? 'x' : 'y';
-		this.toward>2? this[xy]++ : this[xy]--;
+		var xy = this.toward%2? 'y' : 'x';
+		this.toward>1? this[xy]+=0.1 : this[xy]-=0.1;
 	}
 
 	Player.prototype.doBullet = function(){
