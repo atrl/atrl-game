@@ -5,16 +5,20 @@ Game.module('Player',function(Game){
 
 
 	var Player = function(x,y){
+		//预设
 		this.img = Config.player.img;
+		this.frames = Config.player.frames;
+		this.keycode = Config.player.keycode.slice();
+		this.power = Config.player.power;
+		this.speed = Config.player.speed;
+		this.bullets = Config.player.bullets;
+
 		this.keyState = Command.state;
 		this.toward = 3; // 0:左 1:上 2:右 3:下
 		this.action = 'default';
 		this.frameCount = 0;
-		this.frames = Config.player.frames;
 		this.x = x;
 		this.y = y;
-		this.keycode = Config.player.keycode.slice();
-		this.power = Config.player.power;
 	}
 	
 	Player.prototype = new Sprite();
@@ -73,6 +77,27 @@ Game.module('Player',function(Game){
 	Player.prototype.doRun = function(){
 		var xy = this.toward%2? 'y' : 'x';
 		this.toward>1? this[xy]+=0.1 : this[xy]-=0.1;
+
+		//检测碰撞
+		var x,y;
+		if(this.toward>1){
+			x = Math.ceil(this.x);
+			y = Math.ceil(this.y);
+		}else{
+			x = Math.floor(this.x);
+			y = Math.floor(this.y);
+		}
+
+		if( y<0 || x<0 || y>=Game.stage.map.length || x>=Game.stage.map[0].length || (Game.stage.map[y][x].split('_')[0] != 0 && Game.stage.map[y][x].split('_')[0] != 4 )){
+			if(this.toward>1){
+				this.x = Math.floor(this.x);
+				this.y = Math.floor(this.y);
+			}else{
+				this.x = Math.ceil(this.x);
+				this.y = Math.ceil(this.y);
+			}
+			
+		}
 	}
 
 	Player.prototype.doBullet = function(){
