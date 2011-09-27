@@ -18,15 +18,35 @@ Game.module('Keeper',function(Game){
 
 	Keeper.prototype.step = function(){
 
-		if(this.frameCount < this.frames[this.action].length-1){
-			
-		}else if(this.frameCount = this.frames[this.action].length-1){
-			this.action == 'die' ? this.life = 0 : this.frameCount = 0;
+		if(this.action == 'die' && this.frameCount >= this.frames[this.action].length){
+				this.life = 0;
+				//产生奖励
+				this.checkBonus();
+				return;
+		}else{
+			this.frameCount = 0;
 		}
+
 		this.frame = this.frames[this.action][this.frameCount];
-		Game.draw(Game.imgCache[this.img], this.frame.x, this.frame.y, this.frame.w, this.frame.h,this.x*Config.gridW+Config.paddingX,this.y*Config.gridH+Config.paddingY, this.frame.w, this.frame.h);
+
+		Game.draw(
+			Game.imgCache[this.img], 
+			this.frame.x, this.frame.y, 
+			this.frame.w, this.frame.h, 
+			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
+			this.frame.w, this.frame.h
+		);
 
 		this.frameCount++;
+	}
+	
+	Keeper.prototype.checkBonus = function(){
+		if(Math.random()<0.2){
+			Game.stage.create(4, this.x, this.y);
+			Game.stage.map[this.y][this.x] = 4;
+		}else{
+			Game.stage.map[this.y][this.x] = 0;
+		}
 	}
 
 	return Keeper;

@@ -93,8 +93,8 @@ var Game = (function(){
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
 			w = w || img.width;
 			h = h || img.height;
-			cx= cx || x;
-			cy= cy || y;
+			cx= cx + Config.paddingX || x;
+			cy= cy + Config.paddingY || y;
 			cw= cw || w;
 			ch= ch || h;
 			ctx.drawImage(img,x,y,w,h,cx,cy,cw,ch);
@@ -113,7 +113,7 @@ var Game = (function(){
 			}
 		}
 	}
-	window._Game = Game;
+
 	return {
 		init : function(Config){
 			Game.init(Config);
@@ -128,7 +128,7 @@ var Game = (function(){
 			Game.pool[name] = func(Game);
 		}
 	};
-	
+
 })()
 
 window.onload = function(){
