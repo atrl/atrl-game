@@ -114,6 +114,7 @@ var Game = (function(){
 		}
 	}
 
+	//返回外部接口
 	return {
 		init : function(Config){
 			Game.init(Config);

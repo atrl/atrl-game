@@ -75,28 +75,29 @@ Game.module('Player',function(Game){
 	}
 
 	Player.prototype.doRun = function(){
-		var xy = this.toward%2? 'y' : 'x';
-		this.toward>1? this[xy]+=0.1 : this[xy]-=0.1;
+		var xy = this.toward%2? 'y' : 'x',
+			speed = (this.toward>2?1:-1)*Config.speed+Config.speed*Config.speed*this.speed;
 
-		//检测碰撞
-		var x,y;
-		if(this.toward>1){
-			x = Math.ceil(this.x);
-			y = Math.ceil(this.y);
-		}else{
-			x = Math.floor(this.x);
-			y = Math.floor(this.y);
-		}
+		//检测可行
+		var pos;
 
-		if( y<0 || x<0 || y>=Game.stage.map.length || x>=Game.stage.map[0].length || (Game.stage.map[y][x].split('_')[0] != 0 && Game.stage.map[y][x].split('_')[0] != 4 )){
-			if(this.toward>1){
-				this.x = Math.floor(this.x);
-				this.y = Math.floor(this.y);
-			}else{
-				this.x = Math.ceil(this.x);
-				this.y = Math.ceil(this.y);
+		var pos1 = Math.ceil(this[xy]),
+			pos2 = Math.floor(this[xy]);
+		
+		if(xy == 'y'){
+			if(Game.stage.map[pos1][this.x].split('_')[0] != 0 && Game.stage.map[pos1][this.x].split('_')[0] != 4){
+				this.y = Math.ceil(this.y)>this.y+speed?this.y+speed:Math.ceil(this.y);
+				this.x = Math.ceil(this.x)>this.x+speed?this.x+speed:Math.ceil(this.x);
+			}else if(Game.stage.map[pos2][this.x].split('_')[0] != 0 && Game.stage.map[pos2][this.x].split('_')[0] != 4){
+				this.x = Math.floor(this.x)>this.x+speed?this.x+speed:Math.floor(this.x);
 			}
-			
+		}else{
+			if(Game.stage.map[this.y][pos1].split('_')[0] != 0 && Game.stage.map[this.y][pos1].split('_')[0] != 4){
+				this.y = Math.ceil(this.y)>this.y+speed?this.y+speed:Math.ceil(this.y);
+				this.x = Math.ceil(this.x)>this.x+speed?this.x+speed:Math.ceil(this.x);
+			}else if(Game.stage.map[this.y][pos2].split('_')[0] != 0 && Game.stage.map[this.y][pos2].split('_')[0] != 4){
+				this.y = Math.floor(this.y)>this.y+speed?this.y+speed:Math.floor(this.y);
+			}
 		}
 	}
 
