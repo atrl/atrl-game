@@ -91,7 +91,7 @@ Game.module('Player',function(Game){
 				this.x = Math.max(x1,this.x+speed);
 				this.y = Math.max(y1,this.y+speed);
 			}else if(Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
-				this.y = Math.max(y1,this.y-peed);
+				this.y = Math.max(y1,this.y+speed);
 			}
 		}else if (this.toward == 1){
 			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y1][x2]){
