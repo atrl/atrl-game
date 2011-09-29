@@ -31,6 +31,10 @@ var Config = {
 	//地图边距
 	paddingX : 48,
 	paddingY : 10,
+	
+	//速度基数
+	speed : 0.1,
+	
 	//精灵属性
 	player : {
 		img : 'player',
