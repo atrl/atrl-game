@@ -18,7 +18,6 @@ var Command = function(){
 			case 'keydown':
 				if (state[code] > 0) return;
 				state[code] = timeNow;
-				//queue.push('(' + timeNow + ')' + code + '↓');
 				if (code == 80){
 					Game.pause();
 				}else if(code == 13){
@@ -27,7 +26,6 @@ var Command = function(){
 				break;
 			case 'keyup':
 				state[code] = 0;
-				//queue.push('(' + timeNow + ')' + code + '↑');
 				break;
 		}
 	}

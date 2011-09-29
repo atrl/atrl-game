@@ -60,7 +60,7 @@ Game.module('Stage', function(Game){
 				default:
 					break;
 			}
-			this.map[y][x] = sprite[0] == 1 ? 0 : id;
+			this.map[y][x] = sprite[0] == 1 ? 0 : +sprite[0];
 		},
 		'delete' : function(spriteId){
 			delete SpritePool[spriteId];

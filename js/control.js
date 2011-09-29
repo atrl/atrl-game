@@ -17,6 +17,7 @@ var Game = (function(){
 	
 	//游戏状态
 	is_pause = false,
+	is_start = false,
 
 	//统计帧
 	frame_count = 0,
@@ -49,8 +50,10 @@ var Game = (function(){
 		},
 		//游戏开始
 		start : function(){
+			if(is_start) return;
 			(this.stage = new this.pool['Stage'](1)).start();
 			this.step();
+			is_start = true;
 		},
 
 		//暂停

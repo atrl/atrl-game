@@ -75,52 +75,50 @@ Game.module('Player',function(Game){
 	}
 
 	Player.prototype.doRun = function(){
-		var xy = this.toward%2? 'y' : 'x',
-			speed = (this.toward>1?1:-1)*(Config.speed+Config.speed*Config.speed*this.speed);
+		var speed = (this.toward>1?1:-1)*(Config.speed+Config.speed*Config.speed*this.speed);
 
 		//检测可行
-		var x1 = Math.ceil(this.x+speed),
-			y1 = Math.ceil(this.y+speed),
-			x2 = Math.floor(this.x+speed),
-			y2 = Math.floor(this.y+speed);
+		var x0 = this.toward%2?this.x:this.x+speed,
+			y0 = this.toward%2?this.y+speed:this.y,
+
+			x1 = Math.min(Math.max(0,Math.ceil(x0)),Game.stage.map[0].length-1),
+			y1 = Math.min(Math.max(0,Math.ceil(y0)),Game.stage.map[0].length-1),
+			x2 = Math.min(Math.max(0,Math.floor(x0)),Game.stage.map[0].length-1),
+			y2 = Math.min(Math.max(0,Math.floor(y0)),Game.stage.map[0].length-1);
 		
+
+		//太蠢了 暂时先这样
 		if(this.toward == 0){
-			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
-				this.x = Math.max(x1,this.x+speed);
-			}else if(!Game.stage.map[y1][x1]&&Game.stage.map[y2][x1]){
-				this.x = Math.max(x1,this.x+speed);
-				this.y = Math.max(y1,this.y+speed);
-			}else if(Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
-				this.y = Math.max(y1,this.y+speed);
+			if(!Game.stage.map[y1][x2]&&!Game.stage.map[y2][x2]){
+				this.x = Math.max(x2,this.x+speed);
+			}else if(!Game.stage.map[y1][x2]&&Game.stage.map[y2][x2]){
+				this.y = Math.min(y1,this.y-speed);
+			}else if(Game.stage.map[y1][x2]&&!Game.stage.map[y2][x2]){
+				this.y = Math.max(y2,this.y+speed);
 			}
 		}else if (this.toward == 1){
-			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y1][x2]){
-				this.x = Math.max(x1,this.x+speed);
-			}else if(!Game.stage.map[y1][x1]&&Game.stage.map[y2][x1]){
-				this.x = Math.max(x1,this.x+speed);
-				this.y = Math.max(y1,this.y+speed);
-			}else if(Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
-				this.y = Math.max(y1,this.y+speed);
+			if(!Game.stage.map[y2][x1]&&!Game.stage.map[y2][x2]){
+				this.y = Math.max(y2,this.y+speed);
+			}else if(!Game.stage.map[y2][x1]&&Game.stage.map[y2][x2]){
+				this.x = Math.min(x1,this.x-speed);
+			}else if(Game.stage.map[y2][x1]&&!Game.stage.map[y2][x2]){
+				this.x = Math.max(x2,this.x+speed);
 			}
 		}else if (this.toward == 2){
 			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
 				this.x = Math.min(x1,this.x+speed);
-			
-			}else if(!Game.stage.map[y1][x1]&&Game.stage.map[y2][x1]){
-				this.x = Math.min(x1,this.x+speed);
-				this.y = Math.min(y1,this.y+speed);
-			}else if(Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
+			}else if(!Game.stage.map[y2][x1]&&Game.stage.map[y1][x1]){
+				this.y = Math.max(y2,this.y-speed)
+			}else if(Game.stage.map[y2][x1]&&!Game.stage.map[y1][x1]){
 				this.y = Math.min(y1,this.y+speed);
 			}
 		}else if (this.toward == 3){
-			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
-				this.x = Math.min(x1,this.x+speed);
-			
-			}else if(!Game.stage.map[y1][x1]&&Game.stage.map[y2][x1]){
-				this.x = Math.min(x1,this.x+speed);
+			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y1][x2]){
 				this.y = Math.min(y1,this.y+speed);
-			}else if(Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
-				this.y = Math.min(y1,this.y+speed);
+			}else if(!Game.stage.map[y1][x2]&&Game.stage.map[y1][x1]){
+				this.x = Math.max(x2,this.x-speed);
+			}else if(Game.stage.map[y1][x2]&&!Game.stage.map[y1][x1]){
+				this.x = Math.min(x1,this.x+speed);
 			}
 		}
 	}
