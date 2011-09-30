@@ -42,10 +42,7 @@ Game.module('Keeper',function(Game){
 	
 	Keeper.prototype.checkBonus = function(){
 		if(Math.random()<0.2){
-			Game.stage.create(4, this.x, this.y);
-			Game.stage.map[this.y][this.x] = 4;
-		}else{
-			Game.stage.map[this.y][this.x] = 0;
+			Game.stage.map.create(4, this.x, this.y);
 		}
 	}
 
