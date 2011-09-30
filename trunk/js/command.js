@@ -2,7 +2,7 @@ var Command = function(){
 	// 键盘事件状态
 	var 
 	state = {},
-	instance = {
+	Command = {
 		init : function(){
 			window.addEventListener('keydown', handle, false);
 			window.addEventListener('keyup', handle, false);
@@ -30,5 +30,5 @@ var Command = function(){
 		}
 	}
 
-	return instance;
+	return Command;
 }()

@@ -42,7 +42,6 @@ var Game = (function(){
 			this.imgCache = {};
 			load();
 			Command.init();
-			this.pool['Stage'].init();
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
 			canvas.width = 304;

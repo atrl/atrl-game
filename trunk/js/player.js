@@ -81,43 +81,43 @@ Game.module('Player',function(Game){
 		var x0 = this.toward%2?this.x:this.x+speed,
 			y0 = this.toward%2?this.y+speed:this.y,
 
-			x1 = Math.min(Math.max(0,Math.ceil(x0)),Game.stage.map[0].length-1),
-			y1 = Math.min(Math.max(0,Math.ceil(y0)),Game.stage.map[0].length-1),
-			x2 = Math.min(Math.max(0,Math.floor(x0)),Game.stage.map[0].length-1),
-			y2 = Math.min(Math.max(0,Math.floor(y0)),Game.stage.map[0].length-1);
+			x1 = Math.min(Math.max(0,Math.ceil(x0)),Game.stage.map.x),
+			y1 = Math.min(Math.max(0,Math.ceil(y0)),Game.stage.map.y),
+			x2 = Math.min(Math.max(0,Math.floor(x0)),Game.stage.map.x),
+			y2 = Math.min(Math.max(0,Math.floor(y0)),Game.stage.map.y);
 		
 
 		//太蠢了 暂时先这样
 		if(this.toward == 0){
-			if(!Game.stage.map[y1][x2]&&!Game.stage.map[y2][x2]){
+			if(Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x2,y2)){
 				this.x = Math.max(x2,this.x+speed);
-			}else if(!Game.stage.map[y1][x2]&&Game.stage.map[y2][x2]){
+			}else if(Game.stage.map.cross(x2,y1)&&!Game.stage.map.cross(x2,y2)){
 				this.y = Math.min(y1,this.y-speed);
-			}else if(Game.stage.map[y1][x2]&&!Game.stage.map[y2][x2]){
+			}else if(!Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x2,y2)){
 				this.y = Math.max(y2,this.y+speed);
 			}
 		}else if (this.toward == 1){
-			if(!Game.stage.map[y2][x1]&&!Game.stage.map[y2][x2]){
+			if(Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x2,y2)){
 				this.y = Math.max(y2,this.y+speed);
-			}else if(!Game.stage.map[y2][x1]&&Game.stage.map[y2][x2]){
+			}else if(Game.stage.map.cross(x1,y2)&&!Game.stage.map.cross(x2,y2)){
 				this.x = Math.min(x1,this.x-speed);
-			}else if(Game.stage.map[y2][x1]&&!Game.stage.map[y2][x2]){
+			}else if(!Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x2,y2)){
 				this.x = Math.max(x2,this.x+speed);
 			}
 		}else if (this.toward == 2){
-			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y2][x1]){
+			if(Game.stage.map.cross(x1,y1)&&Game.stage.map.cross(x1,y2)){
 				this.x = Math.min(x1,this.x+speed);
-			}else if(!Game.stage.map[y2][x1]&&Game.stage.map[y1][x1]){
+			}else if(Game.stage.map.cross(x1,y2)&&!Game.stage.map.cross(x1,y1)){
 				this.y = Math.max(y2,this.y-speed)
-			}else if(Game.stage.map[y2][x1]&&!Game.stage.map[y1][x1]){
+			}else if(!Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x1,y1)){
 				this.y = Math.min(y1,this.y+speed);
 			}
 		}else if (this.toward == 3){
-			if(!Game.stage.map[y1][x1]&&!Game.stage.map[y1][x2]){
+			if(Game.stage.map.cross(x1,y1)&&Game.stage.map.cross(x2,y1)){
 				this.y = Math.min(y1,this.y+speed);
-			}else if(!Game.stage.map[y1][x2]&&Game.stage.map[y1][x1]){
+			}else if(Game.stage.map.cross(x2,y1)&&!Game.stage.map.cross(x1,y1)){
 				this.x = Math.max(x2,this.x-speed);
-			}else if(Game.stage.map[y1][x2]&&!Game.stage.map[y1][x1]){
+			}else if(!Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x1,y1)){
 				this.x = Math.min(x1,this.x+speed);
 			}
 		}
@@ -126,7 +126,7 @@ Game.module('Player',function(Game){
 	Player.prototype.doBullet = function(){
 		var x = Math.round(this.x),
 			y = Math.round(this.y);
-		if(Command.state[Config.player.A] && Game.stage.map[y][x] == 0){
+		if(Command.state[Config.player.A] && Game.stage.map.cross(x,y)){
 			Game.stage.create(5, x, y, {power:this.power});
 		}
 	}
