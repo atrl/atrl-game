@@ -4,11 +4,10 @@
 Game.module('Bonus', function(Game){
 
 
-	var Bonus = function(x, y){
+	var Bonus = function(x, y, id){
+		Sprite.call(this, x, y, id);
 		//随机奖励类型
 		this.type = Math.floor(Math.random()*Config.bonus.type.length);
-		this.x = x;
-		this.y = y;
 	}
 
 	Bonus.prototype = new Sprite();

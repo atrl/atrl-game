@@ -82,7 +82,7 @@ Game.module('Map',function(Game){
 			
 			//添加精灵
 			create : function(sprite, x, y, config){
-				var id = sprite +'_' + x + '_' +y;
+				var id = sprite +'_' + x + '_' +y, Class;
 
 				// 精灵类型
 				sprite = (sprite+"").split('');
@@ -91,23 +91,22 @@ Game.module('Map',function(Game){
 
 				switch(+sprite[0]){
 					case 1:
-						SpritePool[id] = new Game.pool['Player'](x,y);
+						Class = 'Player';
 						break;
 					case 2:
-						SpritePool[id] = new Game.pool['Wall'](x,y,sprite[1]);
+						Class = 'Wall';
 						break;
 					case 3:
-						SpritePool[id] = new Game.pool['Keeper'](x,y);
+						Class = 'Keeper';
 						break;
 					case 4:
-						SpritePool[id] = new Game.pool['Bonus'](x,y);
+						Class = 'Bonus';
 						break;
 					case 5:
-						SpritePool[id] = new Game.pool['Bullet'](x,y);
-						break;
-					default:
+						Class = 'Bullet';
 						break;
 				}
+				if(typeof Class !== 'undefined')SpritePool[id] = new Game.pool[Class](x,y,id,sprite[1]);
 			},
 
 			//删除精灵

@@ -4,8 +4,10 @@
 Game.module('Player',function(Game){
 
 
-	var Player = function(x,y){
+	var Player = function(x, y, id){
 		//预设
+		Sprite.call(this, x, y, id);
+
 		this.img = Config.player.img;
 		this.frames = Config.player.frames;
 		this.keycode = Config.player.keycode.slice();
@@ -17,8 +19,7 @@ Game.module('Player',function(Game){
 		this.toward = 3; // 0:左 1:上 2:右 3:下
 		this.action = 'default';
 		this.frameCount = 0;
-		this.x = x;
-		this.y = y;
+
 	}
 	
 	Player.prototype = new Sprite();
@@ -126,7 +127,7 @@ Game.module('Player',function(Game){
 	Player.prototype.doBullet = function(){
 		var x = Math.round(this.x),
 			y = Math.round(this.y);
-		if(Command.state[Config.player.A] && Game.stage.map.cross(x,y)){
+		if(Command.state[Config.player.A] && Game.stage.map.cross(x,y) && Game.pool['Bullet'].count(this.id)){
 			Game.stage.create(5, x, y, {power:this.power});
 		}
 	}

@@ -3,10 +3,10 @@
 */
 Game.module('Wall',function(Game){
 
-	var Wall = function(x,y,sprite){
+	var Wall = function(x,y,id,sprite){
+		Sprite.call(this, x, y, id);
+
 		this.img = Config.keeper.img;
-		this.x = x;
-		this.y = y;
 		this.frame = Config.wall.frames.default[sprite];
 	}
 		

@@ -4,13 +4,13 @@
 Game.module('Keeper',function(Game){
 
 
-	var Keeper = function(x,y){
+	var Keeper = function(x, y, id){
+		Sprite.call(this, x, y, id);
+
 		this.img = Config.keeper.img;
 		this.frames = Config.keeper.frames;
 		this.action = 'default';
 		this.frameCount = 0;
-		this.x = x;
-		this.y = y;
 	}
 		
 	Keeper.prototype = new Sprite();
