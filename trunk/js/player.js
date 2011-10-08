@@ -4,9 +4,9 @@
 Game.module('Player',function(Game){
 
 
-	var Player = function(x, y, id){
+	var Player = function(x, y, id, config){
 		//预设
-		Sprite.call(this, x, y, id);
+		Sprite.call(this, x, y, id, config);
 
 		this.img = Config.player.img;
 		this.frames = Config.player.frames;
@@ -17,9 +17,6 @@ Game.module('Player',function(Game){
 
 		this.keyState = Command.state;
 		this.toward = 3; // 0:左 1:上 2:右 3:下
-		this.action = 'default';
-		this.frameCount = 0;
-
 	}
 	
 	Player.prototype = new Sprite();
@@ -55,7 +52,7 @@ Game.module('Player',function(Game){
 		this.frame = this.action == 'default' ? this.frames[this.action][this.toward] : this.frames[this.action][this.frameCount];
 		
 		Game.draw(
-			Game.imgCache[this.img], 
+			this.img, 
 			this.frame.x, this.frame.y, 
 			this.frame.w, this.frame.h, 
 			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
@@ -127,8 +124,8 @@ Game.module('Player',function(Game){
 	Player.prototype.doBullet = function(){
 		var x = Math.round(this.x),
 			y = Math.round(this.y);
-		if(Command.state[Config.player.A] && Game.stage.map.cross(x,y) && Game.pool['Bullet'].count(this.id)){
-			Game.stage.create(5, x, y, {power:this.power});
+		if(this.keyState[Config.player.A] && Game.stage.map.cross(x,y) && Game.pool['Bullet'].count(this.id)<this.bullets){
+			Game.stage.map.create(5, x, y, {power:this.power,player:this.id});
 		}
 	}
 

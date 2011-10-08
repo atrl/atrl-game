@@ -42,7 +42,7 @@ var Config = {
 		A : 97,
 		B : 98,
 		power : 2,
-		bullets : 1,
+		bullets : 10,
 		speed : 1,
 		frames :{
 			 // 0:左 1:上 2:右 3:下
@@ -96,7 +96,17 @@ var Config = {
 			]
 		}
 	},
-	bullet : {},
+	bullet : {
+		img:'keeper',
+		frames:{
+			default:[
+				{x:0,y:40,w:16,h:22,cx:0,cy:0},
+				{x:16,y:40,w:16,h:22,cx:0,cy:0},
+				{x:32,y:40,w:16,h:22,cx:0,cy:0},
+				{x:48,y:40,w:16,h:22,cx:0,cy:0},
+			],
+		}
+	},
 	keeper : {
 		img:'keeper',
 		frames:{

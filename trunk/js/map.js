@@ -88,7 +88,7 @@ Game.module('Map',function(Game){
 				sprite = (sprite+"").split('');
 				
 				config = config || {};
-
+				config.type = config.type || sprite[1];
 				switch(+sprite[0]){
 					case 1:
 						Class = 'Player';
@@ -106,13 +106,24 @@ Game.module('Map',function(Game){
 						Class = 'Bullet';
 						break;
 				}
-				if(typeof Class !== 'undefined')SpritePool[id] = new Game.pool[Class](x,y,id,sprite[1]);
+				if(typeof Class !== 'undefined')SpritePool[id] = new Game.pool[Class](x, y, id, config);
 			},
 
 			//删除精灵
 			delete : function(spriteId){
 				delete SpritePool[spriteId];
+			},
+			
+			//坐标精灵动作
+			action : function (x, y, actionName){
+				for(var s=0,slen=mapCache[y][x].length;s<slen;s++){
+					var id = mapCache[y][x][s];
+					if(SpritePool[id].life){
+						SpritePool[id][actionName]();
+					}
+				}
 			}
+
 		}
 
 	return Map;

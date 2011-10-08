@@ -22,7 +22,7 @@ Game.module('Stage', function(Game){
 		
 		step : function (){
 			//场景
-			Game.draw(Game.imgCache[this.img],0,0);
+			Game.draw(this.img, 0, 0 );
 
 			//地图进步
 			this.map.step();
