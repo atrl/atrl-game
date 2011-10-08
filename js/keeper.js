@@ -4,8 +4,8 @@
 Game.module('Keeper',function(Game){
 
 
-	var Keeper = function(x, y, id){
-		Sprite.call(this, x, y, id);
+	var Keeper = function(x, y, id, config){
+		Sprite.call(this, x, y, id, config);
 
 		this.img = Config.keeper.img;
 		this.frames = Config.keeper.frames;
@@ -30,7 +30,7 @@ Game.module('Keeper',function(Game){
 		this.frame = this.frames[this.action][this.frameCount];
 
 		Game.draw(
-			Game.imgCache[this.img], 
+			this.img, 
 			this.frame.x, this.frame.y, 
 			this.frame.w, this.frame.h, 
 			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 

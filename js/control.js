@@ -28,6 +28,8 @@ var Game = (function(){
 	canvas,
 	ctx,
 
+	imgCache = {},
+
 	//游戏主程序
 	Game = {
 		//关卡
@@ -39,7 +41,6 @@ var Game = (function(){
 		//入口函数 加载设置
 		init : function(){
 			delete this.init;
-			this.imgCache = {};
 			load();
 			Command.init();
 			canvas = document.getElementById('canvas');
@@ -93,6 +94,7 @@ var Game = (function(){
 		},
 		//绘画方法
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
+			img = imgCache[img];
 			w = w || img.width;
 			h = h || img.height;
 			cx= cx + Config.paddingX || x;
@@ -108,9 +110,9 @@ var Game = (function(){
 	function load(){
 		var loadCount = 0 ;
 		for (var i=0,len=Config.img.length; i<len; i++){
-			Game.imgCache[Config.img[i]] = new Image();
-			Game.imgCache[Config.img[i]].src = 'img/'+Config.img[i]+'.gif';
-			Game.imgCache[Config.img[i]].onload = function(){
+			imgCache[Config.img[i]] = new Image();
+			imgCache[Config.img[i]].src = 'img/'+Config.img[i]+'.gif';
+			imgCache[Config.img[i]].onload = function(){
 				loadCount++;
 			}
 		}

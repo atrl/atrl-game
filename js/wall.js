@@ -3,11 +3,11 @@
 */
 Game.module('Wall',function(Game){
 
-	var Wall = function(x,y,id,sprite){
+	var Wall = function(x,y,id,config){
 		Sprite.call(this, x, y, id);
 
 		this.img = Config.keeper.img;
-		this.frame = Config.wall.frames.default[sprite];
+		this.frame = Config.wall.frames.default[config.type];
 	}
 		
 	Wall.prototype = new Sprite();
@@ -15,7 +15,7 @@ Game.module('Wall',function(Game){
 
 	Wall.prototype.step = function(){
 		Game.draw(
-			Game.imgCache[this.img], 
+			this.img, 
 			this.frame.x, this.frame.y, 
 			this.frame.w, this.frame.h, 
 			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
