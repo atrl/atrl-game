@@ -4,7 +4,7 @@
 Game.module('Wall',function(Game){
 
 	var Wall = function(x,y,id,config){
-		Sprite.call(this, x, y, id);
+		Sprite.call(this, x, y, id, config);
 
 		this.img = Config.keeper.img;
 		this.frame = Config.wall.frames.default[config.type];
