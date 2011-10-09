@@ -32,7 +32,7 @@ Game.module('Map',function(Game){
 			step : function(){
 				//循环缓存地图上的精灵
 				mapCache.sort(function(a, b){
-					return SpritePool[a].y<SpritePool[b].y &&  SpritePool[a].x<SpritePool[b].x &&  SpritePool[a].id <SpritePool[b].id;
+					return SpritePool[a].y<SpritePool[b].y &&  SpritePool[a].x<SpritePool[b].x ;
 				})
 				
 				for(var i=0,len= mapCache.length;i<len;i++){
@@ -48,7 +48,7 @@ Game.module('Map',function(Game){
 			//判断是否可行
 			cross : function(x, y){
 				for(var i=0,len=mapCache.length;i<len;i++){
-					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].x) !== y)
+					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
 						continue;
 					// 精灵类型 
 					// http://lifesinger.wordpress.com/2011/09/30/simplify-indexof-using-bitwise-not/
