@@ -7,8 +7,6 @@ Game.module('Stage', function(Game){
 
 	var 
 
-	SpritePool = [],
-
 	Stage = function(stage){
 		this.stage = stage;
 		this.img = 'bg';

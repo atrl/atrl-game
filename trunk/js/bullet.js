@@ -20,6 +20,7 @@ Game.module('Bullet', function(Game){
 
 	}
 
+	//统计玩家所有炸弹数
 	Bullet.count = function(player){
 		var count = 0;
 		for (var i in bulletCache){
@@ -33,31 +34,48 @@ Game.module('Bullet', function(Game){
 	
 	Bullet.prototype.step = function(){
 		
-		//帧循环判断
-		if(this.frameCount >= this.frames[this.action].length){
-			if(this.action == 'die'){
-				this.life = 0;
-				return;
-			}else{
-				this.frameCount = 0;
-			}
-		}
-		
-		//当前帧
-		this.frame = this.frames[this.action][this.frameCount];
+		if(this.action == 'die'){
+			var x,y;
+			this.life = 0;
+			
 
-		Game.draw(
-			this.img, 
-			this.frame.x, this.frame.y, 
-			this.frame.w, this.frame.h, 
-			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
-			this.frame.w, this.frame.h
-		);
-		this.frameCount++;
+			//
+			for(x=this.x-1;x>this.x-this.power;x--){
+					if(!Game.stage.map.action(x,y,'die'))
+						break;
+					Game.stage.map.create(6, x, this.y, {style:this.x-this.power-x});
+			}
+
+			for(y=this.y-1;y>this.y-this.power;y--){
+				
+			}
+
+			for(x=this.x-1;x>this.x-this.power;x--){
+					if(!Game.stage.map.action(x,y,'die'))
+						break;
+					Game.stage.map.create(6, x, y, {style:this.x-this.power-x});
+			}
+
+			for(x=this.x-1;x>this.x-this.power;x--){
+					if(!Game.stage.map.action(x,y,'die'))
+						break;
+					Game.stage.map.create(6, x, y, {style:this.x-this.power-x});
+			}
+		}else if(this.action == 'default'){
+			//当前帧
+			this.frame = this.frames[this.action][this.frameCount%this.frames[this.action].length];
+
+			Game.draw(
+				this.img, 
+				this.frame.x, this.frame.y, 
+				this.frame.w, this.frame.h, 
+				this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
+				this.frame.w, this.frame.h
+			);
+
+			this.frameCount++;
+		}
 	},
-	Bullet.prototype.boom = function(){
-		
-	}
 
 	return Bullet;
 });

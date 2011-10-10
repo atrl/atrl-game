@@ -69,7 +69,6 @@ var Game = (function(){
 		//单步循环
 		step : function(){
 			var that = this;
-			frame_count++;
 			
 			//每50帧调节一次fps
 			if( frame_count%50 == 0) {
@@ -91,6 +90,8 @@ var Game = (function(){
 			this.stage.step();
 
 			interval = setTimeout(function(){that.step()},step_time);
+
+			frame_count++;
 		},
 		//绘画方法
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
