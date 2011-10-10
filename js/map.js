@@ -9,9 +9,6 @@ Game.module('Map',function(Game){
 		//地图缓存
 		mapCache = [],
 
-		//精灵ID
-		SpriteId,
-
 		Map = function(){
 		
 		
@@ -30,16 +27,19 @@ Game.module('Map',function(Game){
 			},
 
 			step : function(){
-				//循环缓存地图上的精灵
+				//精灵排序
 				mapCache.sort(function(a, b){
-					return SpritePool[a].y<SpritePool[b].y &&  SpritePool[a].x<SpritePool[b].x ;
+					return Math.ceil(SpritePool[a].y) - Math.ceil(SpritePool[b].y) || 
+						Math.ceil(SpritePool[a].x) - Math.ceil(SpritePool[b].x) || 
+						a.substring(0,1)<b.substring(0,1);
 				})
-				
-				for(var i=0,len= mapCache.length;i<len;i++){
+				//所有精灵进步
+				for(var i = 0; i<mapCache.length; i++){
 					if(SpritePool[mapCache[i]].life){
 						SpritePool[mapCache[i]].step();
 					}else{
 						this.delete(mapCache[i]);
+						i--;
 					}
 					
 				}
@@ -66,7 +66,7 @@ Game.module('Map',function(Game){
 				sprite = (sprite+"").split('');
 				
 				config = config || {};
-				config.type = config.type || sprite[1];
+				config.style = config.style || sprite[1];
 				switch(+sprite[0]){
 					case 1:
 						Class = 'Player';
@@ -82,6 +82,9 @@ Game.module('Map',function(Game){
 						break;
 					case 5:
 						Class = 'Bullet';
+						break;
+					case 6:
+						Class = 'Atom';
 						break;
 				}
 				if(typeof Class !== 'undefined'){
@@ -101,12 +104,13 @@ Game.module('Map',function(Game){
 			
 			//坐标精灵动作
 			action : function (x, y, actionName){
-				for(var s=0,slen=mapCache[y][x].length;s<slen;s++){
-					var id = mapCache[y][x][s];
-					if(SpritePool[id].life){
-						SpritePool[id][action] = actionName;
-					}
+				for(var i=0,len=mapCache.length;i<len;i++){
+					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
+						continue;
+					if(SpritePool[mapCache[i]].life){
+						SpritePool[mapCache[i]].action = actionName;
 				}
+				return true;
 			}
 
 		}

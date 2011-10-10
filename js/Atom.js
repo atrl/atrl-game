@@ -1,19 +1,20 @@
 ﻿﻿/**
 *	障碍类
 */
-Game.module('Wall',function(Game){
+Game.module('Atom', function(Game){
 
-	var Wall = function(x,y,id,config){
+	var Atom = function(x,y,id,config){
 		Sprite.call(this, x, y, id, config);
 
-		this.img = Config.keeper.img;
-		this.frame = Config.wall.frames[this.action][config.style];
+		
 	}
 		
-	Wall.prototype = new Sprite();
-	Wall.prototype.constructor = Wall;
+	Atom.prototype = new Sprite();
+	Atom.prototype.constructor = Atom;
 
-	Wall.prototype.step = function(){
+	Atom.prototype.step = function(){
+		Game.stage.map.action(this.x, this.y, 'die');
+
 		Game.draw(
 			this.img, 
 			this.frame.x, this.frame.y, 
@@ -21,7 +22,9 @@ Game.module('Wall',function(Game){
 			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
 			this.frame.w, this.frame.h
 		);
+
+		this.frameCount++;
 	}
-	return Wall;
+	return Atom;
 
 });
