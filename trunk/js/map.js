@@ -33,13 +33,16 @@ Game.module('Map',function(Game){
 						Math.ceil(SpritePool[a].x) - Math.ceil(SpritePool[b].x) || 
 						a.substring(0,1)<b.substring(0,1);
 				})
+
+					window.mapCache = mapCache;
 				//所有精灵进步
-				for(var i = 0; i<mapCache.length; i++){
+				for(var i = 0,len = mapCache.length; i<len; i++){
 					if(SpritePool[mapCache[i]].life){
 						SpritePool[mapCache[i]].step();
 					}else{
 						this.delete(mapCache[i]);
 						i--;
+						len--;
 					}
 					
 				}
@@ -47,6 +50,9 @@ Game.module('Map',function(Game){
 			
 			//判断是否可行
 			cross : function(x, y){
+				//超过地图边界
+				if(x<0 || y<0 || x>this.x ||y>this.y)
+					return false;
 				for(var i=0,len=mapCache.length;i<len;i++){
 					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
 						continue;
@@ -103,14 +109,18 @@ Game.module('Map',function(Game){
 			},
 			
 			//坐标精灵动作
-			action : function (x, y, actionName){
+			doAction : function (x, y, sprite, actionName){
+				var result = false;
+				if(!actionName){
+					actionName = sprite;
+					sprite = 0;
+				}
 				for(var i=0,len=mapCache.length;i<len;i++){
 					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
 						continue;
-					if(SpritePool[mapCache[i]].life){
-						SpritePool[mapCache[i]].action = actionName;
+					if(SpritePool[mapCache[i]].life)
+						SpritePool[mapCache[i]].doAction(actionName);
 				}
-				return true;
 			}
 
 		}

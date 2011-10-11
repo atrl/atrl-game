@@ -7,6 +7,11 @@ var Command = function(){
 			window.addEventListener('keydown', handle, false);
 			window.addEventListener('keyup', handle, false);
 		},
+		over : function(){
+			window.removeEventListener('keydown', handle, false);
+			window.removeEventListener('keyup', handle, false);
+		
+		},
 		state : state
 	};
 	

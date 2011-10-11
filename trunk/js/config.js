@@ -41,8 +41,8 @@ var Config = {
 		keycode : [37, 38, 39, 40],
 		A : 97,
 		B : 98,
-		power : 2,
-		bullets : 10,
+		power : 1,
+		bullets : 2,
 		speed : 1,
 		frames :{
 			 // 0:左 1:上 2:右 3:下

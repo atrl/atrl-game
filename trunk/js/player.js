@@ -6,7 +6,7 @@ Game.module('Player',function(Game){
 
 	var Player = function(x, y, id, config){
 		//预设
-		Sprite.call(this, x, y, id, config);
+		Game.pool['Sprite'].call(this, x, y, id, config);
 
 		this.img = Config.player.img;
 		this.frames = Config.player.frames;
@@ -17,48 +17,42 @@ Game.module('Player',function(Game){
 
 		this.keyState = Command.state;
 		this.toward = 3; // 0:左 1:上 2:右 3:下
+
+		this.actions = {'die':1};
 	}
 	
-	Player.prototype = new Sprite();
+	Player.prototype = new Game.pool['Sprite']();
 	Player.prototype.constructor = Player;
 
 	Player.prototype.step = function(){
-
-		//精灵方向
-		this.getToward();
-
-		//精灵是否运动
-		if(Command.state[this.keycode[this.toward]] && !Command.state[this.keycode[(this.toward+2)%4]]){
-			this.action = this.toward;
-			this.doRun();
-		}else{
-			this.action = 'default';
-		}
-
-		//创建炸弹
-		this.doBullet();
-
-		//帧循环判断
-		if(this.frameCount >= this.frames[this.action].length){
-			if(this.action == 'die'){
+		if(this.action == 'die'){
+			if(this.frameCount >= this.frames[this.action].length){
 				this.life = 0;
+				Game.over();
 				return;
-			}else{
-				this.frameCount = 0;
 			}
+		}else{
+
+			//精灵方向
+			this.getToward();
+
+			//精灵是否运动
+			if(Command.state[this.keycode[this.toward]] && !Command.state[this.keycode[(this.toward+2)%4]]){
+				this.action = this.toward;
+				this.doRun();
+			}else{
+				this.action = 'default';
+			}
+
+			//创建炸弹
+			this.doBullet();
+
 		}
 		
 		//当前帧
-		this.frame = this.action == 'default' ? this.frames[this.action][this.toward] : this.frames[this.action][this.frameCount];
+		this.frame = this.action == 'default' ? this.frames[this.action][this.toward] : this.frames[this.action][this.frameCount%this.frames[this.action].length];
 		
-		Game.draw(
-			this.img, 
-			this.frame.x, this.frame.y, 
-			this.frame.w, this.frame.h, 
-			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
-			this.frame.w, this.frame.h
-		);
-
+		this.draw();
 		this.frameCount++;
 	}
 	Player.prototype.getToward = function(){
@@ -124,6 +118,7 @@ Game.module('Player',function(Game){
 	Player.prototype.doBullet = function(){
 		var x = Math.round(this.x),
 			y = Math.round(this.y);
+
 		if(this.keyState[Config.player.A] && Game.stage.map.cross(x,y) && Game.pool['Bullet'].count(this.id)<this.bullets){
 			Game.stage.map.create(5, x, y, {power:this.power,player:this.id});
 		}
