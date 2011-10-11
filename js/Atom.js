@@ -3,27 +3,27 @@
 */
 Game.module('Atom', function(Game){
 
-	var Atom = function(x,y,id,config){
-		Sprite.call(this, x, y, id, config);
+	var 
+	//炸弹伤害帧数
+	dieFrame = 7,
 
-		
+	Atom = function(x,y,id,config){
+		Game.pool['Sprite'].call(this, x, y, id, config);
+		this.img = Config.keeper.img;
 	}
 		
-	Atom.prototype = new Sprite();
+	Atom.prototype = new Game.pool['Sprite']();
 	Atom.prototype.constructor = Atom;
 
 	Atom.prototype.step = function(){
-		Game.stage.map.action(this.x, this.y, 'die');
+		Game.stage.map.doAction(this.x, this.y, 'die');
 
-		Game.draw(
-			this.img, 
-			this.frame.x, this.frame.y, 
-			this.frame.w, this.frame.h, 
-			this.x*Config.gridW + this.frame.cx, this.y*Config.gridH + this.frame.cy, 
-			this.frame.w, this.frame.h
-		);
+		//this.draw();
 
 		this.frameCount++;
+		if(this.frameCount == dieFrame){
+			this.life = 0;
+		}
 	}
 	return Atom;
 

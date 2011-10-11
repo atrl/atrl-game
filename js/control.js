@@ -40,8 +40,13 @@ var Game = (function(){
 
 		//入口函数 加载设置
 		init : function(){
+			//删除入口
 			delete this.init;
+			//删除模块加载方法
+			delete this.module;
+			//加载图片
 			load();
+			//监听事件
 			Command.init();
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
@@ -66,6 +71,12 @@ var Game = (function(){
 			}
 			is_pause = !is_pause;
 		},
+		
+		//游戏结束
+		over : function(){
+			
+		},
+
 		//单步循环
 		step : function(){
 			var that = this;
@@ -83,7 +94,6 @@ var Game = (function(){
 				} else if (fps > 24.4) {
 					step_time ++;
 				}
-				$('p').html('fps:'+fps+'<br/>step_time:'+step_time);
 			}
 
 			//帧进步
