@@ -3,18 +3,23 @@
 */
 Game.module('Bonus', function(Game){
 
-	var Bonus = function(x, y, id, config){
+	var 
+		Bonus_style = ['power', 'speed', 'bullets'],
+	Bonus = function(x, y, id, config){
 		Game.pool['Sprite'].call(this, x, y, id, config);
-		this.img = Config.player.img;
+		this.img = Config.keeper.img;
 		this.frames = Config.bonus.frames;
-
+		this.action = Bonus_style[config.style];
 	}
 
 	Bonus.prototype = new Game.pool['Sprite']();
 	Bonus.prototype.constructor = Bonus;
 
 	Bonus.prototype.step = function(){
-	
+		this.frame = this.frames[this.action][this.frameCount%this.frames[this.action].length];
+
+		this.draw();
+		this.frameCount++;
 	
 	}
 	return Bonus;

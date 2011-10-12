@@ -21,6 +21,8 @@ Game.module('Stage', function(Game){
 		step : function (){
 			//场景
 			Game.draw(this.img, 0, 0 );
+			
+			//时间管理
 
 			//地图进步
 			this.map.step();
