@@ -7,7 +7,7 @@ var Command = function(){
 			window.addEventListener('keydown', handle, false);
 			window.addEventListener('keyup', handle, false);
 		},
-		over : function(){
+		unbind : function(){
 			window.removeEventListener('keydown', handle, false);
 			window.removeEventListener('keyup', handle, false);
 		
