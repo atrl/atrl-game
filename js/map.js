@@ -72,13 +72,13 @@ Game.module('Map',function(Game){
 				sprite = (sprite+"").split('');
 				
 				config = config || {};
-				config.style = config.style || sprite[1];
 				switch(+sprite[0]){
 					case 1:
 						Class = 'Player';
 						break;
 					case 2:
 						Class = 'Wall';
+						config.style = config.style || sprite[1];
 						break;
 					case 3:
 						Class = 'Keeper';

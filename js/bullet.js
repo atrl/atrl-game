@@ -11,7 +11,7 @@ Game.module('Bullet', function(Game){
 	bulletCache = {},
 
 	//炸弹爆炸帧数
-	dieFrame = 72,
+	dieFrame = 48,
 
 	Bullet = function(x, y, id, config){
 		Game.pool['Sprite'].call(this, x, y, id, config);
