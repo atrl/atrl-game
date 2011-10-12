@@ -134,5 +134,14 @@ var Config = {
 				{x:48,y:16,w:16,h:22,cx:0,cy:-6}
 			]
 		}
+	},
+	atom : {
+		img : 'keeper',
+		frames:{
+			default:[
+				{x:0,y:40,w:16,h:22,cx:0,cy:0},
+			]
+		}
 	}
+
 };

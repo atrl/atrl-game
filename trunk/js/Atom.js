@@ -4,8 +4,6 @@
 Game.module('Atom', function(Game){
 
 	var 
-	//炸弹伤害帧数
-	dieFrame = 7,
 
 	Atom = function(x,y,id,config){
 		Game.pool['Sprite'].call(this, x, y, id, config);
