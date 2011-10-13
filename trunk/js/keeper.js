@@ -37,7 +37,6 @@ Game.module('Keeper',function(Game){
 	Keeper.prototype.checkBonus = function(){
 		var ran = Math.random();
 		if(ran<0.3){
-			console.log(ran);
 			Game.stage.map.create(4, this.x, this.y,{style : Math.floor(ran*10)});
 		}
 	}

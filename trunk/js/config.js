@@ -41,7 +41,7 @@ var Config = {
 		keycode : [37, 38, 39, 40],
 		A : 97,
 		B : 98,
-		power : 1,
+		power : 2,
 		bullets : 2,
 		speed : 1,
 		frames :{

@@ -29,45 +29,40 @@ Game.module('Bullet', function(Game){
 	
 	Bullet.prototype.step = function(){
 		if(this.action == 'die'){
-			var x,y;
+			var x,y,power = --this.power;
 			
-
 			//左
-			for(x=this.x-1;x>=this.x-this.power;x--){
-				if(!Game.stage.map.cross(x, this.y)){
-					Game.stage.map.doAction(x, this.y,'die');
-					break;
-				}else{
-					Game.stage.map.create(6, x, this.y);
-				}
+			x= this.x-1;
+			if(!Game.stage.map.cross(this.x-1, this.y)){
+				Game.stage.map.doAction(x, this.y,'die');
+			}else{
+				Game.stage.map.create(6, x, this.y,{toward:0,power:power});
 			}
+
 			//上
-			for(y=this.y-1;y>=this.y-this.power;y--){
-				if(!Game.stage.map.cross(this.x,y)){
-					Game.stage.map.doAction(this.x, y,'die');
-					break;
-				}else{
-					Game.stage.map.create(6, this.x, y);
-				}
+			y=this.y-1;
+			if(!Game.stage.map.cross(this.x,y)){
+				Game.stage.map.doAction(this.x, y,'die');
+			}else{
+				Game.stage.map.create(6, this.x, y,{toward:1,power:power});
 			}
+
 			//右
-			for(x=this.x+1;x<=this.x+this.power;x++){
-				if(!Game.stage.map.cross(x, this.y)){
-					Game.stage.map.doAction(x, this.y,'die');
-					break;
-				}else{
-					Game.stage.map.create(6, x, this.y);
-				}
+			x=this.x+1;
+			if(!Game.stage.map.cross(x, this.y)){
+				Game.stage.map.doAction(x, this.y,'die');
+			}else{
+				Game.stage.map.create(6, x, this.y,{toward:2,power:power});
 			}
+
 			//下
-			for(y=this.y+1;y<=this.y+this.power;y++){
-				if(!Game.stage.map.cross(this.x,y)){
-					Game.stage.map.doAction(this.x, y,'die');
-					break;
-				}else{
-					Game.stage.map.create(6, this.x, y);
-				}
+			y=this.y+1;
+			if(!Game.stage.map.cross(this.x,y)){
+				Game.stage.map.doAction(this.x, y,'die');
+			}else{
+				Game.stage.map.create(6, this.x, y,{toward:3,power:power});
 			}
+
 			//中
 			Game.stage.map.create(6, this.x, this.y);
 

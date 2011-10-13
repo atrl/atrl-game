@@ -6,13 +6,17 @@
 Game.module('Sprite', function(Game){
 
 	var Sprite = function(x, y, id, config){
+		//生命
 		this.life = 1;
 		this.x = x;
 		this.y = y;
 		this.id = id;
+		//动作
+		this.actions = {'default':1};
 		this.action = 'default';
 		this.frameCount = 0;
-		this.actions = {'default':1};
+		//精灵类型
+		//this.type = config.type;
 	}
 
 	Sprite.prototype = {
@@ -26,7 +30,7 @@ Game.module('Sprite', function(Game){
 			);
 		},
 		doAction : function(actionName){
-			if(!this.actions[actionName]) return;
+			if(!this.actions[actionName] || this.action == actionName) return;
 			this.action = actionName;
 			this.frameCount = 0;
 		}

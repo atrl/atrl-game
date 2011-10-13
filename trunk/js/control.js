@@ -100,7 +100,6 @@ var Game = (function(){
 			this.stage.step();
 
 			interval = setTimeout(function(){that.step()},step_time);
-			$('p').html(fps);
 			frame_count++;
 		},
 		//绘画方法

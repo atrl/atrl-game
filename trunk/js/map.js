@@ -72,6 +72,7 @@ Game.module('Map',function(Game){
 				sprite = (sprite+"").split('');
 				
 				config = config || {};
+				//config.type = sprite[0];
 				switch(+sprite[0]){
 					case 1:
 						Class = 'Player';
@@ -106,6 +107,23 @@ Game.module('Map',function(Game){
 						mapCache.splice(i,1); 
 				}
 				delete SpritePool[id];
+			},
+			
+			//检测碰撞
+			collision : function(x, y){
+				//超过地图边界
+				if(x<0 || y<0 || x>this.x ||y>this.y)
+					return false;
+				for(var i=0,len=mapCache.length;i<len;i++){
+					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
+						continue;
+					// 精灵类型 
+					// http://lifesinger.wordpress.com/2011/09/30/simplify-indexof-using-bitwise-not/
+					if(~[2,3,5].indexOf(+mapCache[i].split('')[0]))
+						return false;
+				}
+				return true;
+
 			},
 			
 			//坐标精灵动作
