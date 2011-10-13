@@ -38,6 +38,7 @@ Game.module('Atom', function(Game){
 			}else{
 				Game.stage.map.create(6, x, y,{toward:this.toward,power:power});
 			}
+			this.power = 0;
 		}
 
 		Game.stage.map.doAction(this.x, this.y, 'die');
