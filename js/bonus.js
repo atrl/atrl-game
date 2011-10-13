@@ -16,6 +16,11 @@ Game.module('Bonus', function(Game){
 	Bonus.prototype.constructor = Bonus;
 
 	Bonus.prototype.step = function(){
+		if(this.action == 'die'){
+			this.life = 0;
+			return;
+		}
+
 		this.frame = this.frames[this.action][this.frameCount%this.frames[this.action].length];
 
 		this.draw();

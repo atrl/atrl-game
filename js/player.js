@@ -120,6 +120,9 @@ Game.module('Player',function(Game){
 			y = Math.round(this.y);
 
 		if(this.keyState[Config.player.A] && Game.stage.map.cross(x,y) && Game.pool['Bullet'].count(this.id)<this.bullets){
+			//释放动作
+			this.keyState[Config.player.A] = 0;
+			//创建炸弹
 			Game.stage.map.create(5, x, y, {power:this.power,player:this.id});
 		}
 	}
