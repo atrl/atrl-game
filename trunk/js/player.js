@@ -7,13 +7,13 @@ Game.module('Player',function(Game){
 	var Player = function(x, y, id, config){
 		//预设
 		Game.pool['Sprite'].call(this, x, y, id, config);
-
-		this.img = Config.player.img;
-		this.frames = Config.player.frames;
-		this.keycode = Config.player.keycode.slice();
-		this.power = Config.player.power;
-		this.speed = Config.player.speed;
-		this.bullets = Config.player.bullets;
+		this.style = config.style;
+		this.img = Config['player'+this.style].img;
+		this.frames = Config['player'+this.style].frames;
+		this.keycode = Config['player'+this.style].keycode.slice();
+		this.power = Config['player'+this.style].power;
+		this.speed = Config['player'+this.style].speed;
+		this.bullets = Config['player'+this.style].bullets;
 
 		this.keyState = Command.state;
 		this.toward = 3; // 0:左 1:上 2:右 3:下
@@ -121,9 +121,9 @@ Game.module('Player',function(Game){
 		var x = Math.round(this.x),
 			y = Math.round(this.y);
 
-		if(this.keyState[Config.player.A] && Game.stage.map.cross(x,y) && Game.pool['Bullet'].count(this.id)<this.bullets){
+		if(this.keyState[Config['player'+this.style].A] && Game.stage.map.cross(x,y) && Game.pool['Bullet'].count(this.id)<this.bullets){
 			//释放动作
-			this.keyState[Config.player.A] = 0;
+			this.keyState[Config['player'+this.style].A] = 0;
 			//创建炸弹
 			Game.stage.map.create(5, x, y, {power:this.power,player:this.id});
 		}
