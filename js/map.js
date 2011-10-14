@@ -47,23 +47,7 @@ Game.module('Map',function(Game){
 					
 				}
 			},
-			
-			//判断是否可行
-			cross : function(x, y){
-				//超过地图边界
-				if(x<0 || y<0 || x>this.x ||y>this.y)
-					return false;
-				for(var i=0,len=mapCache.length;i<len;i++){
-					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
-						continue;
-					// 精灵类型 
-					// http://lifesinger.wordpress.com/2011/09/30/simplify-indexof-using-bitwise-not/
-					if(~[2,3,5].indexOf(+mapCache[i].split('')[0]))
-						return false;
-				}
-				return true;
-			},
-			
+
 			//添加精灵
 			create : function(sprite, x, y, config){
 				var id = sprite +'_' + x + '_' +y, Class;
@@ -99,6 +83,23 @@ Game.module('Map',function(Game){
 					mapCache.push(id);
 				}
 			},
+			
+			//判断是否可行
+			cross : function(x, y){
+				//超过地图边界
+				if(x<0 || y<0 || x>this.x ||y>this.y)
+					return false;
+				for(var i=0,len=mapCache.length;i<len;i++){
+					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
+						continue;
+					// 精灵类型 
+					// http://lifesinger.wordpress.com/2011/09/30/simplify-indexof-using-bitwise-not/
+					if(~[2,3,5].indexOf(+mapCache[i].split('')[0]))
+						return false;
+				}
+				return true;
+			},
+			
 
 			//删除精灵
 			delete : function(id){
@@ -117,12 +118,15 @@ Game.module('Map',function(Game){
 				for(var i=0,len=mapCache.length;i<len;i++){
 					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
 						continue;
-					// 精灵类型 
-					// http://lifesinger.wordpress.com/2011/09/30/simplify-indexof-using-bitwise-not/
-					if(~[2,3,5].indexOf(+mapCache[i].split('')[0]))
-						return false;
+					if(~[4].indexOf(+mapCache[i].split('')[0])){
+						
+						var result = SpritePool[mapCache[i]].action;
+						SpritePool[mapCache[i]].action = 'die';
+						console.log(result);
+						return result;
+					}
 				}
-				return true;
+				return false;
 
 			},
 			

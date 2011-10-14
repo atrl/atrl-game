@@ -113,6 +113,8 @@ Game.module('Player',function(Game){
 				this.x = Math.min(x1,this.x+speed);
 			}
 		}
+		var style = Game.stage.map.collision(this.x,this.y);
+		if(style)this[style]++;
 	}
 
 	Player.prototype.doBullet = function(){

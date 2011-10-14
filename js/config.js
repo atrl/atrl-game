@@ -3,7 +3,7 @@
 */
 var Config = {
 
-	img : ['player','bg','keeper'],
+	img : ['player','bg','keeper','atom'],
 	/**
 	*	地图
 	*	1:玩家
@@ -41,7 +41,7 @@ var Config = {
 		keycode : [37, 38, 39, 40],
 		A : 97,
 		B : 98,
-		power : 2,
+		power : 1,
 		bullets : 2,
 		speed : 1,
 		frames :{
@@ -233,11 +233,23 @@ var Config = {
 		}
 	},
 	atom : {
-		img : 'keeper',
+		img : 'atom',
 		frames:{
 			default:[
-				{x:0,y:40,w:16,h:22,cx:0,cy:0},
-			]
+				{x:0,y:0,w:16,h:16,cx:0,cy:0},
+				{x:16,y:0,w:16,h:16,cx:0,cy:0},
+				{x:32,y:0,w:16,h:16,cx:0,cy:0},
+				{x:48,y:0,w:16,h:16,cx:0,cy:0},
+				{x:32,y:0,w:16,h:16,cx:0,cy:0},
+				{x:48,y:0,w:16,h:16,cx:0,cy:0},
+				{x:32,y:0,w:16,h:16,cx:0,cy:0},
+				{x:48,y:0,w:16,h:16,cx:0,cy:0},
+				{x:32,y:0,w:16,h:16,cx:0,cy:0},
+				{x:48,y:0,w:16,h:16,cx:0,cy:0},
+				{x:32,y:0,w:16,h:16,cx:0,cy:0},
+				{x:48,y:0,w:16,h:16,cx:0,cy:0}
+			],
+			
 		}
 	}
 

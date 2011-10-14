@@ -7,11 +7,12 @@ Game.module('Atom', function(Game){
 
 	Atom = function(x,y,id,config){
 		Game.pool['Sprite'].call(this, x, y, id, config);
-		this.img = Config.keeper.img;
+		this.img = Config.atom.img;
 		this.frames = Config.atom.frames;
 
 		this.toward = config.toward;
 		this.power = config.power;
+		this.style = config.style||'default';
 	}
 		
 	Atom.prototype = new Game.pool['Sprite']();
@@ -25,16 +26,15 @@ Game.module('Atom', function(Game){
 
 		if(this.power){
 			var x,y,power = --this.power;
-			if(this.toward){
+			if(this.toward%2){
 				x = this.x;
 				y = (this.toward>1?1:-1)+this.y;
 			}else{
 				x = (this.toward>1?1:-1)+this.x;
 				y = this.y;
 			}
-
 			if(!Game.stage.map.cross(x,y)){
-				Game.stage.map.doAction(this.x, y,'die');
+				Game.stage.map.doAction(x, y,'die');
 			}else{
 				Game.stage.map.create(6, x, y,{toward:this.toward,power:power});
 			}
@@ -42,9 +42,8 @@ Game.module('Atom', function(Game){
 		}
 
 		Game.stage.map.doAction(this.x, this.y, 'die');
-		
-		this.frame = this.frames[this.action][this.frameCount];
-		//this.draw();
+		this.frame = this.frames[this.style][this.frameCount];
+		this.draw();
 
 		this.frameCount++;
 	}

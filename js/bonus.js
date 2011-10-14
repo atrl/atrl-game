@@ -10,6 +10,7 @@ Game.module('Bonus', function(Game){
 		this.img = Config.keeper.img;
 		this.frames = Config.bonus.frames;
 		this.action = Bonus_style[config.style];
+		this.actions = {die:1};
 	}
 
 	Bonus.prototype = new Game.pool['Sprite']();
