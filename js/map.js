@@ -50,7 +50,7 @@ Game.module('Map',function(Game){
 
 			//添加精灵
 			create : function(sprite, x, y, config){
-				var id = sprite +'_' + x + '_' +y, Class;
+				var id = sprite +'_' + x + '_' +y +'_'+Math.random().toString(36).substring(2), Class;
 
 				// 精灵类型
 				sprite = (sprite+"").split('');
