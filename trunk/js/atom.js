@@ -40,7 +40,6 @@ Game.module('Atom', function(Game){
 			}
 			this.power = 0;
 			this.style = this.toward+'_1';
-			console.log(this.style);
 			this.frameCount = 0;
 		}
 
