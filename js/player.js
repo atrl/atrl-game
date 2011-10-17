@@ -26,7 +26,7 @@ Game.module('Player',function(Game){
 		this.keyState = Command.state;
 		this.toward = 3; // 0:左 1:上 2:右 3:下
 
-		this.actions = ['die'];
+		this.actions = ['die','stand',0,1,2,3,'default'];
 	}
 	
 	Player.prototype = new Game.pool['Sprite']();
@@ -48,8 +48,11 @@ Game.module('Player',function(Game){
 			if(Command.state[this.keycode[this.toward]] && !Command.state[this.keycode[(this.toward+2)%4]]){
 				this.action = this.toward;
 				this.doRun();
+			}else if(this.action == 'stand'){
+				this.frameCount>=this.frames[this.action].length&&this.doAction('default');
 			}else{
 				this.action = 'default';
+				this.frameCount>=128&&this.doAction('stand');
 			}
 
 			//创建炸弹
