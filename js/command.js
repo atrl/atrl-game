@@ -25,8 +25,6 @@ var Command = function(){
 				state[code] = timeNow;
 				if (code == 80){
 					Game.pause();
-				}else if(code == 13){
-					Game.start();
 				}
 				break;
 			case 'keyup':
