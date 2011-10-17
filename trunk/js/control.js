@@ -21,7 +21,6 @@ var Game = (function(){
 
 	//统计帧
 	frame_count = 0,
-	
 	frame_last_time = 0,
 
 	//canvas
@@ -52,6 +51,7 @@ var Game = (function(){
 			ctx = canvas.getContext('2d');
 			canvas.width = 304;
 			canvas.height = 202;
+			this.start();
 		},
 		//游戏开始
 		start : function(){

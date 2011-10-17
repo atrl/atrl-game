@@ -127,7 +127,8 @@ var Config = {
 				{x:119,y:135,w:17,h:41,cx:0,cy:-35}
 			]
 		}
-	},player1 : {
+	},
+	player1 : {
 		img : 'player',
 		keycode : [37, 38, 39, 40],
 		A : 97,
@@ -225,10 +226,14 @@ var Config = {
 			default:[
 				{x:0,y:42,w:16,h:16,cx:0,cy:0},
 				{x:0,y:42,w:16,h:16,cx:0,cy:0},
+				{x:0,y:42,w:16,h:16,cx:0,cy:0},
+				{x:16,y:42,w:16,h:16,cx:0,cy:0},
 				{x:16,y:42,w:16,h:16,cx:0,cy:0},
 				{x:16,y:42,w:16,h:16,cx:0,cy:0},
 				{x:32,y:42,w:16,h:16,cx:0,cy:0},
 				{x:32,y:42,w:16,h:16,cx:0,cy:0},
+				{x:32,y:42,w:16,h:16,cx:0,cy:0},
+				{x:48,y:42,w:16,h:16,cx:0,cy:0},
 				{x:48,y:42,w:16,h:16,cx:0,cy:0},
 				{x:48,y:42,w:16,h:16,cx:0,cy:0}
 			],
@@ -311,7 +316,6 @@ var Config = {
 			]
 		}
 	},
-
 	wall : {
 		img:'keeper',
 		frames:{
@@ -511,5 +515,4 @@ var Config = {
 			
 		}
 	}
-
 };
