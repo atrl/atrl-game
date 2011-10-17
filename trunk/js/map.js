@@ -56,7 +56,7 @@ Game.module('Map',function(Game){
 				sprite = (sprite+"").split('');
 				
 				config = config || {};
-				//config.type = sprite[0];
+				config.type = sprite[0];
 				switch(+sprite[0]){
 					case 1:
 						Class = 'Player';
@@ -90,15 +90,13 @@ Game.module('Map',function(Game){
 				//超过地图边界
 				if(x<0 || y<0 || x>this.x ||y>this.y)
 					return false;
+				var Area = [];
 				for(var i=0,len=mapCache.length;i<len;i++){
 					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
 						continue;
-					// 精灵类型 
-					// http://lifesinger.wordpress.com/2011/09/30/simplify-indexof-using-bitwise-not/
-					if(~[2,3,5].indexOf(+mapCache[i].split('')[0]))
-						return false;
+					Area.push(+mapCache[i].split('')[0]);
 				}
-				return true;
+				return !Area.length||!~Area.indexOf(2)||!~Area.indexOf(3)||(~Area.indexOf(5)&&~Area.indexOf(0));
 			},
 			
 
@@ -116,6 +114,7 @@ Game.module('Map',function(Game){
 				for(var i=0,len=mapCache.length;i<len;i++){
 					if( Math.round(SpritePool[mapCache[i]].x) !== Math.round(x) ||  Math.round(SpritePool[mapCache[i]].y) !== Math.round(y))
 						continue;
+				// http://lifesinger.wordpress.com/2011/09/30/simplify-indexof-using-bitwise-not/
 					if(~[4].indexOf(+mapCache[i].split('')[0])){
 						var result = SpritePool[mapCache[i]].action;
 						SpritePool[mapCache[i]].action = 'die';

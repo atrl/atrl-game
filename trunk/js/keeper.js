@@ -9,7 +9,7 @@ Game.module('Keeper',function(Game){
 
 		this.img = Config.keeper.img;
 		this.frames = Config.keeper.frames;
-		this.actions = {'die':1};
+		this.actions = ['die'];
 	}
 		
 	Keeper.prototype = new Game.pool['Sprite']();
