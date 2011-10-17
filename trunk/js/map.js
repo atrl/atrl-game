@@ -90,13 +90,16 @@ Game.module('Map',function(Game){
 				//超过地图边界
 				if(x<0 || y<0 || x>this.x ||y>this.y)
 					return false;
-				var Area = [];
+				var Area = [],type;
 				for(var i=0,len=mapCache.length;i<len;i++){
 					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
 						continue;
-					Area.push(+mapCache[i].split('')[0]);
+					type = +mapCache[i].split('')[0];
+					if(~[2,3].indexOf(type))
+						return false;
+					Area.push(type);
 				}
-				return !Area.length||!~Area.indexOf(2)||!~Area.indexOf(3)||(~Area.indexOf(5)&&~Area.indexOf(0));
+				return ~Area.indexOf(5)?~Area.indexOf(1):true;
 			},
 			
 
