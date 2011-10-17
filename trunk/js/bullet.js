@@ -29,6 +29,7 @@ Game.module('Bullet', function(Game){
 	
 	Bullet.prototype.step = function(){
 		if(this.action == 'die'){
+			if(bulletCache[this.id])delete bulletCache[this.id];
 			var x,y,power = --this.power;
 			
 			//左
@@ -75,7 +76,6 @@ Game.module('Bullet', function(Game){
 			this.frameCount++;
 			if(this.frameCount >= dieFrame){
 				this.action = 'die';
-				delete bulletCache[this.id];
 			}
 		}
 	}

@@ -4,7 +4,15 @@
 Game.module('Player',function(Game){
 
 
-	var Player = function(x, y, id, config){
+	var 
+
+	MAX = {
+		power : 5,
+		speed : 5,
+		bullets : 5
+	},
+
+	Player = function(x, y, id, config){
 		//预设
 		Game.pool['Sprite'].call(this, x, y, id, config);
 		this.style = config.style;
@@ -114,7 +122,7 @@ Game.module('Player',function(Game){
 			}
 		}
 		var style = Game.stage.map.collision(this.x,this.y);
-		if(style)this[style]++;
+		if(style) this[style] = MAX[style]>this[style]?this[style]+1:MAX[style];
 	}
 
 	Player.prototype.doBullet = function(){
