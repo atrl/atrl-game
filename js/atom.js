@@ -12,7 +12,7 @@ Game.module('Atom', function(Game){
 
 		this.toward = config.toward;
 		this.power = config.power;
-		this.style = config.style||'default';
+		this.style = typeof this.toward !== 'undefined'? this.toward:'default';
 	}
 		
 	Atom.prototype = new Game.pool['Sprite']();
@@ -39,6 +39,9 @@ Game.module('Atom', function(Game){
 				Game.stage.map.create(6, x, y,{toward:this.toward,power:power});
 			}
 			this.power = 0;
+			this.style = this.toward+'_1';
+			console.log(this.style);
+			this.frameCount = 0;
 		}
 
 		Game.stage.map.doAction(this.x, this.y, 'die');

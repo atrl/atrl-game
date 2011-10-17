@@ -113,12 +113,8 @@ Game.module('Map',function(Game){
 			
 			//检测碰撞
 			collision : function(x, y){
-				//超过地图边界
-				x = Math.round(x);
-				y = Math.round(y);
-				if(x<0 || y<0 || x>this.x ||y>this.y)return false;
 				for(var i=0,len=mapCache.length;i<len;i++){
-					if( Math.round(SpritePool[mapCache[i]].x) !== x ||  Math.round(SpritePool[mapCache[i]].y) !== y)
+					if( Math.round(SpritePool[mapCache[i]].x) !== Math.round(x) ||  Math.round(SpritePool[mapCache[i]].y) !== Math.round(y))
 						continue;
 					if(~[4].indexOf(+mapCache[i].split('')[0])){
 						var result = SpritePool[mapCache[i]].action;
