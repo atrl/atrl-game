@@ -12,11 +12,11 @@ Game.module('Sprite', function(Game){
 		this.y = y;
 		this.id = id;
 		//动作
-		this.actions = {'default':1};
+		this.actions = ['default'];
 		this.action = 'default';
 		this.frameCount = 0;
 		//精灵类型
-		//this.type = config.type;
+		this.type = config&&config.type;
 	}
 
 	Sprite.prototype = {
@@ -30,7 +30,7 @@ Game.module('Sprite', function(Game){
 			);
 		},
 		doAction : function(actionName){
-			if(!this.actions[actionName] || this.action == actionName) return;
+			if(!~this.actions.indexOf(actionName) || this.action == actionName) return;
 			this.action = actionName;
 			this.frameCount = 0;
 		}

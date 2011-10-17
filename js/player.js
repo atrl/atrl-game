@@ -26,7 +26,7 @@ Game.module('Player',function(Game){
 		this.keyState = Command.state;
 		this.toward = 3; // 0:左 1:上 2:右 3:下
 
-		this.actions = {'die':1};
+		this.actions = ['die'];
 	}
 	
 	Player.prototype = new Game.pool['Sprite']();
@@ -91,36 +91,37 @@ Game.module('Player',function(Game){
 		if(this.toward == 0){
 			if(Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x2,y2)){
 				this.x = Math.max(x2,this.x+speed);
-			}else if(Game.stage.map.cross(x2,y1)&&!Game.stage.map.cross(x2,y2)){
+			}else if(Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x1,y1)){
 				this.y = Math.min(y1,this.y-speed);
-			}else if(!Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x2,y2)){
+			}else if(Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x2,y2)){
 				this.y = Math.max(y2,this.y+speed);
 			}
 		}else if (this.toward == 1){
 			if(Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x2,y2)){
 				this.y = Math.max(y2,this.y+speed);
-			}else if(Game.stage.map.cross(x1,y2)&&!Game.stage.map.cross(x2,y2)){
+			}else if(Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x1,y1)){
 				this.x = Math.min(x1,this.x-speed);
-			}else if(!Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x2,y2)){
+			}else if(Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x2,y2)){
 				this.x = Math.max(x2,this.x+speed);
 			}
 		}else if (this.toward == 2){
 			if(Game.stage.map.cross(x1,y1)&&Game.stage.map.cross(x1,y2)){
 				this.x = Math.min(x1,this.x+speed);
-			}else if(Game.stage.map.cross(x1,y2)&&!Game.stage.map.cross(x1,y1)){
+			}else if(Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x2,y2)){
 				this.y = Math.max(y2,this.y-speed)
-			}else if(!Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x1,y1)){
+			}else if(Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x1,y1)){
 				this.y = Math.min(y1,this.y+speed);
 			}
 		}else if (this.toward == 3){
 			if(Game.stage.map.cross(x1,y1)&&Game.stage.map.cross(x2,y1)){
 				this.y = Math.min(y1,this.y+speed);
-			}else if(Game.stage.map.cross(x2,y1)&&!Game.stage.map.cross(x1,y1)){
+			}else if(Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x2,y2)){
 				this.x = Math.max(x2,this.x-speed);
-			}else if(!Game.stage.map.cross(x2,y1)&&Game.stage.map.cross(x1,y1)){
+			}else if(Game.stage.map.cross(x1,y2)&&Game.stage.map.cross(x1,y1)){
 				this.x = Math.min(x1,this.x+speed);
 			}
 		}
+
 		var style = Game.stage.map.collision(this.x,this.y);
 		if(style) this[style] = MAX[style]>this[style]?this[style]+1:MAX[style];
 	}
