@@ -49,13 +49,12 @@ Game.module('Player',function(Game){
 				this.action = this.toward;
 				this.doRun();
 			}else if(this.action == 'stand'){
-				this.frameCount>=this.frames[this.action].length&&this.doAction('default');
+				
 			}else if(this.action != 'default'){
 				this.doAction('default');
 			}else{
 				if(this.frameCount>=120){
 					this.doAction('stand');
-					this.toward = 3;
 				};
 			}
 
