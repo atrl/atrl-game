@@ -23,10 +23,6 @@ var Game = (function(){
 	frame_count = 0,
 	frame_last_time = 0,
 
-	//canvas
-	canvas,
-	ctx,
-
 	imgCache = {},
 
 	//游戏主程序
@@ -47,10 +43,10 @@ var Game = (function(){
 			load();
 			//监听事件
 			Command.init();
-			canvas = document.getElementById('canvas');
-			ctx = canvas.getContext('2d');
-			canvas.width = 304;
-			canvas.height = 202;
+			this.canvas = document.getElementById('canvas');
+			this.ctx = this.canvas.getContext('2d');
+			this.canvas.width = 304;
+			this.canvas.height = 202;
 			this.start();
 		},
 		//游戏开始
@@ -111,8 +107,8 @@ var Game = (function(){
 			cy= cy + Config.paddingY || y;
 			cw= cw || w;
 			ch= ch || h;
-			ctx.drawImage(img,x,y,w,h,cx,cy,cw,ch);
-		},
+			this.ctx.drawImage(img,x,y,w,h,cx,cy,cw,ch);
+		}
 		
 	};
 
