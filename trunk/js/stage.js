@@ -9,6 +9,12 @@ Game.module('Stage', function(Game){
 
 	//帷幕
 	MaxCurtain = 24;
+	
+	//当前关卡
+	stage,
+
+	//关卡动作
+	stageLogic = {},
 
 	drawCurtain = function(frameCount){
 		var alpha = (1-frameCount/MaxCurtain).toFixed(2);
@@ -18,33 +24,51 @@ Game.module('Stage', function(Game){
 
 	//关卡
 	Stage = function(stage){
-		this.stage = stage;
-		this.img = 'bg';
+		this.scence = new Game.pool['Scence']();
 		this.map = new Game.pool['Map']();
 		this.timer = new Game.pool['Timer']();
-		this.frameCount = 0;
 	};
 
 	Stage.prototype = {
-		start : function(){
-			this.map.start();
-			this.timer.start();
+		start : function(stage){
+			switch(stage){
+				//开始动画
+				case "begin":
+					this.scence.start();
+					stageLogic = ['scence'];
+					break;
+				//结束动画
+				case "end":
+					this.scence.start();
+					stageLogic = ['scence'];
+					break;
+				//关卡1
+				case 1:
+					this.scence.start();
+					this.map.start();
+					this.timer.start();
+					stageLogic = ['scence','map','timer'];
+					break;
+			}
+			this.frameCount = 0;
+
+			
 		},
 		
 		step : function (){
-			//场景
-			Game.draw(this.img, 0, 0 );
-			
-			//时间管理
-			this.timer.step();
 
-			//地图进步
-			this.map.step();
+			for(var i=0,len=stageLogic.length;i<len;i++){
+				this[stageLogic[i]].step();
+			}
 
 			//帷幕
 			if(this.frameCount<MaxCurtain) drawCurtain(this.frameCount);
 
 			this.frameCount++;
+		},
+		
+		goStage:function(stage){
+		
 		}
 	}
 
