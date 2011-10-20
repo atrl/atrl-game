@@ -8,67 +8,98 @@ Game.module('Stage', function(Game){
 	var 
 
 	//帷幕
-	MaxCurtain = 24;
+	MaxCurtain = 24,
+	i = 0,
+	alpha,
+	//帷幕状态
+	show_curtain = false,
 	
-	//当前关卡
-	stage,
-
-	//关卡动作
-	stageLogic = {},
-
-	drawCurtain = function(frameCount){
-		var alpha = (1-frameCount/MaxCurtain).toFixed(2);
-		Game.ctx.fillStyle = "rgba(0,0,0,"+alpha+")";
-		Game.ctx.fillRect(0, 0, Game.canvas.width, Game.canvas.width);
-	},
+	
 
 	//关卡
 	Stage = function(stage){
-		this.scence = new Game.pool['Scence']();
+		//当前关卡
+		this.stage_action = stage,
+		
+		//切换关卡
+		this.stage_go = this.stage_action,
+		
+		//关卡绑定函数
+		this.satge_func = 0;
+
+		//关卡动作
+		this.stageLogic = {};
+
+		this.scence = new Game.pool['Scene']();
 		this.map = new Game.pool['Map']();
 		this.timer = new Game.pool['Timer']();
 	};
 
 	Stage.prototype = {
+		//开始新关卡
 		start : function(stage){
+			this.stage_action = this.stage_go;
 			switch(stage){
 				//开始动画
 				case "begin":
-					this.scence.start();
-					stageLogic = ['scence'];
+					this.scence.start(stage);
+					this.stageLogic = ['scence'];
+					this.satge_func = function(){
+						if(Command.state['13'])
+							this.goStage(1);
+					}
 					break;
 				//结束动画
 				case "end":
-					this.scence.start();
-					stageLogic = ['scence'];
+					this.scence.start(stage);
+					this.stageLogic = ['scence'];
+					this.satge_func ='';
 					break;
-				//关卡1
-				case 1:
-					this.scence.start();
-					this.map.start();
-					this.timer.start();
-					stageLogic = ['scence','map','timer'];
+				//关卡
+				default:
+					this.scence.start(stage);
+					this.map.start(stage);
+					this.timer.start(stage);
+					this.stageLogic = ['scence','map','timer'];
+					this.satge_func ='';
 					break;
 			}
 			this.frameCount = 0;
-
-			
+		},
+		//选择关卡
+		goStage : function(stage){
+			this.stage_go = stage;
+			this.show_curtain = true;
 		},
 		
 		step : function (){
 
-			for(var i=0,len=stageLogic.length;i<len;i++){
-				this[stageLogic[i]].step();
+			for(var i=0,len=this.stageLogic.length;i<len;i++){
+				this[this.stageLogic[i]].step();
 			}
+			
+			this.satge_func&&this.satge_func();
 
 			//帷幕
-			if(this.frameCount<MaxCurtain) drawCurtain(this.frameCount);
+			if(this.show_curtain) this.drawCurtain();
 
 			this.frameCount++;
 		},
-		
-		goStage:function(stage){
-		
+		//绘制帷幕
+		drawCurtain : function(){
+			if(this.stage_go == this.stage_action){
+				alpha = (i/MaxCurtain).toFixed(2);
+				i--;
+			}else{
+				alpha = (i/MaxCurtain).toFixed(2);
+				i++;
+			}
+			Game.ctx.fillStyle = "rgba(0,0,0,"+alpha+")";
+			Game.ctx.fillRect(0, 0, Game.canvas.width, Game.canvas.width);
+			if(i == MaxCurtain)
+				this.start(this.stage_go);//切换关卡
+			else if(i == 0)
+				this.show_curtain = false;//关闭帷幕
 		}
 	}
 
