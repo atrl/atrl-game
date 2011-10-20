@@ -13,7 +13,7 @@ var Command = function(){
 	
 	//事件绑定
 	function handle (e){
-		if(!bind) return;
+		if(!Command.bind) return;
 		var code = e.keyCode,
 		timeNow = +new Date();
 		switch (e.type) {

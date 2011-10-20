@@ -4,7 +4,7 @@
 */
 var Config = {
 
-	img : ['player','bg','keeper','atom'],
+	img : ['player','bg','keeper','atom','begin','text'],
 	/**
 	*	地图
 	*	1:玩家
@@ -585,6 +585,32 @@ var Config = {
 				{x:286,y:112,w:16,h:16,cx:0,cy:0},
 			],
 			
+		}
+	},
+	//场景属性
+	scene : {
+		begin:{
+			bg :'begin',
+			img : 'text',
+			frames : [
+				{x:0,y:0,w:132,h:8,cx:0,cy:0},
+				{x:0,y:0,w:132,h:8,cx:0,cy:0},
+				{},
+				{}
+			]
+		},
+		end :{
+			bg :'begin',
+			img : 'text',
+			frames : [
+				{x:0,y:0,w:132,h:8,cx:0,cy:0},
+				{x:0,y:0,w:132,h:8,cx:0,cy:0},
+				{},
+				{}
+			]
+		},
+		1 : {
+			bg : 'bg'
 		}
 	}
 };

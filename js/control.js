@@ -67,7 +67,7 @@ var Game = (function(){
 		
 		//游戏结束
 		over : function(){
-			this.stage.start('end');
+			this.stage.goStage('end');
 		},
 
 		//单步循环
@@ -97,6 +97,7 @@ var Game = (function(){
 		},
 		//绘画方法
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
+			if(!x||!y) return;
 			img = imgCache[img];
 			w = w || img.width;
 			h = h || img.height;
