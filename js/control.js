@@ -17,7 +17,6 @@ var Game = (function(){
 	
 	//游戏状态
 	is_pause = false,
-	is_start = false,
 
 	//统计帧
 	frame_count = 0,
@@ -46,15 +45,13 @@ var Game = (function(){
 			this.canvas = document.getElementById('canvas');
 			this.ctx = this.canvas.getContext('2d');
 			this.canvas.width = 304;
-			this.canvas.height = 202;
+			this.canvas.height = 224;
 			this.start();
 		},
 		//游戏开始
 		start : function(){
-			if(is_start) return;
-			(this.stage = new this.pool['Stage'](1)).start();
+			(this.stage = new this.pool['Stage']()).start('begin');
 			this.step();
-			is_start = true;
 		},
 
 		//暂停
@@ -70,7 +67,7 @@ var Game = (function(){
 		
 		//游戏结束
 		over : function(){
-			
+			this.stage.start('end');
 		},
 
 		//单步循环

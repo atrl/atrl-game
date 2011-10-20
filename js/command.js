@@ -7,16 +7,13 @@ var Command = function(){
 			window.addEventListener('keydown', handle, false);
 			window.addEventListener('keyup', handle, false);
 		},
-		unbind : function(){
-			window.removeEventListener('keydown', handle, false);
-			window.removeEventListener('keyup', handle, false);
-		
-		},
-		state : state
+		state : state,
+		bind : true
 	};
 	
 	//事件绑定
 	function handle (e){
+		if(!bind) return;
 		var code = e.keyCode,
 		timeNow = +new Date();
 		switch (e.type) {
