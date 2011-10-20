@@ -97,7 +97,7 @@ var Game = (function(){
 		},
 		//绘画方法
 		draw : function(img,x,y,w,h,cx,cy,cw,ch){
-			if(!x||!y) return;
+			if(typeof x == 'undefined'||typeof y == 'undefined') return;
 			img = imgCache[img];
 			w = w || img.width;
 			h = h || img.height;
