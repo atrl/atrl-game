@@ -50,7 +50,7 @@ var Game = (function(){
 		},
 		//游戏开始
 		start : function(){
-			(this.stage = new this.pool['Stage']()).start('begin');
+			(this.stage = new this.pool['Stage']()).start('begin_0');
 			this.step();
 		},
 
