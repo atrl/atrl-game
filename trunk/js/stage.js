@@ -38,10 +38,24 @@ Game.module('Stage', function(Game){
 	Stage.prototype = {
 		//开始新关卡
 		start : function(stage){
-			this.stage_action = this.stage_go;
+			this.stage_action = stage;
 			switch(stage){
 				//开始动画
-				case "begin":
+				case "begin_0":
+					this.scence.start(stage);
+					this.stageLogic = ['scence'];
+					this.satge_func = function(){
+						this.goStage('begin_1');
+					}
+					break;
+				case "begin_1":
+					this.scence.start(stage);
+					this.stageLogic = ['scence'];
+					this.satge_func = function(){
+						this.goStage('begin_2');
+					}
+					break;
+				case "begin_2":
 					this.scence.start(stage);
 					this.stageLogic = ['scence'];
 					this.satge_func = function(){
@@ -78,7 +92,7 @@ Game.module('Stage', function(Game){
 				this[this.stageLogic[i]].step();
 			}
 			
-			this.satge_func&&this.satge_func();
+			!this.show_curtain&&this.satge_func&&this.satge_func();
 
 			//帷幕
 			if(this.show_curtain) this.drawCurtain();

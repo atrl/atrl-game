@@ -4,7 +4,7 @@
 */
 var Config = {
 
-	img : ['player','bg','keeper','atom','begin','text'],
+	img : ['player','bg','keeper','atom','neobombe000','neobombe001','neobombe002','text'],
 	/**
 	*	地图
 	*	1:玩家
@@ -589,8 +589,14 @@ var Config = {
 	},
 	//场景属性
 	scene : {
-		begin:{
-			bg :'begin',
+		begin_0 : {
+			bg : 'neobombe000'
+		},
+		begin_1 : {
+			bg : 'neobombe001'
+		},
+		begin_2:{
+			bg :'neobombe002',
 			img : 'text',
 			frames : [
 				{x:0,y:0,w:132,h:8,cx:40,cy:150},
@@ -620,7 +626,7 @@ var Config = {
 			]
 		},
 		end :{
-			bg :'begin',
+			bg :'neobombe002',
 			img : 'text',
 			frames : [
 				{x:0,y:0,w:132,h:8,cx:40,cy:150},
