@@ -67,7 +67,9 @@ Game.module('Stage', function(Game){
 				case "end":
 					this.scence.start(stage);
 					this.stageLogic = ['scence'];
-					this.satge_func ='';
+					this.satge_func = function(){
+						this.goStage('begin_0');
+					}
 					break;
 				//关卡
 				default:
@@ -75,7 +77,6 @@ Game.module('Stage', function(Game){
 					this.map.start(stage);
 					this.timer.start(stage);
 					this.stageLogic = ['scence','map','timer'];
-					this.satge_func ='';
 					break;
 			}
 			this.frameCount = 0;

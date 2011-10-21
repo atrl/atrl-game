@@ -626,7 +626,7 @@ var Config = {
 			]
 		},
 		end :{
-			bg :'neobombe002',
+			bg :'neobombe001',
 			img : 'text',
 			frames : [
 				{x:0,y:0,w:132,h:8,cx:40,cy:150},
