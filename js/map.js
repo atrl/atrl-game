@@ -22,6 +22,7 @@ Game.module('Map',function(Game){
 						this.create(Config.map[y][x],x,y);
 					}
 				}
+				SpritePool = {};
 				this.x = xlen-1;
 				this.y = ylen-1;
 			},
