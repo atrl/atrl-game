@@ -5,9 +5,9 @@ Game.module('Map',function(Game){
 
 	var 
 		//精灵缓存
-		SpritePool = {},
+		SpritePool,
 		//地图缓存
-		mapCache = [],
+		mapCache,
 
 		Map = function(){
 		
@@ -17,6 +17,7 @@ Game.module('Map',function(Game){
 		Map.prototype = {
 			start : function(){
 				SpritePool = {};
+				mapCache = [];
 				//创建精灵
 				for(var y=0,ylen=Config.map.length;y<ylen;y++){
 					for(var x=0,xlen=Config.map[x].length;x<xlen;x++){
@@ -35,7 +36,6 @@ Game.module('Map',function(Game){
 						a.substring(0,1)<b.substring(0,1);
 				})
 
-					window.mapCache = mapCache;
 				//所有精灵进步
 				for(var i = 0,len = mapCache.length; i<len; i++){
 					if(SpritePool[mapCache[i]].life){
