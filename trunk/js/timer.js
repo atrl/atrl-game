@@ -30,9 +30,9 @@ Game.module('Timer', function(Game){
 			this.frameCount++;
 		},
 		draw : function(){
-			Game.ctx.font = "bold 10px Verdana";
+			Game.ctx.font = "bold 20px Verdana";
 			Game.ctx.fillStyle = "Black";
-			Game.ctx.fillText(this.timeString, 140, 16);
+			Game.ctx.fillText(this.timeString, 140*2, 16*2);
 		}
 	}
 	return Timer;

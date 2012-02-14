@@ -7,7 +7,7 @@ Game.module('Player',function(Game){
 	var 
 
 	MAX = {
-		power : 5,
+		power : 3,
 		speed : 5,
 		bullets : 5
 	},
@@ -81,7 +81,7 @@ Game.module('Player',function(Game){
 	}
 
 	Player.prototype.doRun = function(){
-		var speed = (this.toward>1?1:-1)*(Config.speed+Config.speed*Config.speed*this.speed);
+		var speed = (this.toward>1?1:-1)*(Config.speed+Config.speed*this.speed/5);
 
 		//检测可行
 		var x0 = this.toward%2?this.x:this.x+speed,
