@@ -44,8 +44,8 @@ var Game = (function(){
 			Command.init();
 			this.canvas = document.getElementById('canvas');
 			this.ctx = this.canvas.getContext('2d');
-			this.canvas.width = 304;
-			this.canvas.height = 224;
+			this.canvas.width = 304*2;
+			this.canvas.height = 224*2;
 			this.start();
 		},
 		//游戏开始
@@ -105,7 +105,7 @@ var Game = (function(){
 			cy= cy + Config.paddingY || y;
 			cw= cw || w;
 			ch= ch || h;
-			this.ctx.drawImage(img,x,y,w,h,cx,cy,cw,ch);
+			this.ctx.drawImage(img,x,y,w,h,cx*2,cy*2,cw*2,ch*2);
 		}
 		
 	};
