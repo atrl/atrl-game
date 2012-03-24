@@ -115,7 +115,7 @@ var Game = (function(){
 		var loadCount = 0 ;
 		for (var i=0,len=Config.img.length; i<len; i++){
 			imgCache[Config.img[i]] = new Image();
-			imgCache[Config.img[i]].src = 'img/'+Config.img[i]+ (img[i] == 'neobombe002') ? '.png' : '.gif';
+			imgCache[Config.img[i]].src = 'img/'+Config.img[i]+ (img[i] == 'neobombe002' ? '.png' : '.gif');
 			imgCache[Config.img[i]].onload = function(){
 				loadCount++;
 			}
